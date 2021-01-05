@@ -1,16 +1,25 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import { X } from 'react-bootstrap-icons';
+import CreateCounter from '../../../components/CreateCounter/index';
 
 const CreateCounterModal = ({ modal, clickFunction }) => {
 	return (
-		<Modal show={modal} onHide={clickFunction} animation={false}>
+		<Modal show={modal} onHide={clickFunction} animation={false} dialogClassName="modal-100w modal-100h">
 			<Modal.Header closeButton>
-				<Modal.Title>Modal heading</Modal.Title>
-				<Button variant="secondary" onClick={clickFunction}>
-					Close
+				<Button className="modal-close" variant="secondary" onClick={clickFunction}>
+					<X />
+				</Button>
+				<Modal.Title>
+					<h2>Create a Counter</h2>
+				</Modal.Title>
+				<Button variant="primary" onClick={clickFunction}>
+					Save
 				</Button>
 			</Modal.Header>
-			<Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+			<Modal.Body>
+				<CreateCounter />
+			</Modal.Body>
 		</Modal>
 	);
 };

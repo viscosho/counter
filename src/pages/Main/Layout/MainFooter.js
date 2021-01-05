@@ -8,8 +8,6 @@ export const MainFooter = () => {
 
 	const handleClose = () => setOpenModal(false);
 
-	console.log(openModal);
-
 	return (
 		<footer>
 			<hr />

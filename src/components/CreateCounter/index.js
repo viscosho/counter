@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import NewCounterInput from './components/newCounterInput';
 
 const index = () => {
 	return (
-		<div>
-			<p>contenido del modal</p>
-		</div>
+		<Fragment>
+			<NewCounterInput />
+		</Fragment>
 	);
 };
 
