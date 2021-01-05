@@ -7,11 +7,11 @@ import MainHeader from './Layout/MainHeader';
 const Main = () => {
 	return (
 		<Container id="main">
-			<Row className="d-flex flex-column">
-				<Col className="d-flex flex-column justify-content-center text-center">
+			<Row id="main-row" className="d-flex flex-column align-content-stretch flex-wrap">
+				<Col id="main-header" className="d-flex flex-column justify-content-center text-center">
 					<MainHeader />
 				</Col>
-				<Col>
+				<Col id="main-body">
 					<MainBody />
 				</Col>
 				<Col id="main-footer">

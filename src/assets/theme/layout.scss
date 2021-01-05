@@ -1,10 +1,21 @@
-#main-footer {
-	bottom: 0;
-	left: 0;
-	margin: 0 auto;
-	max-width: 960px;
-	padding-bottom: 2rem;
-	position: fixed;
-	right: 0;
-	width: auto;
+#main {
+	#main-row {
+		height: 100vh;
+
+		#main-header {
+			flex-grow: 1;
+		}
+
+		#main-body {
+			flex-grow: 5;
+
+			main {
+				height: 100%;
+			}
+		}
+
+		#main-footer {
+			flex-grow: 1;
+		}
+	}
 }

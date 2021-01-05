@@ -11,7 +11,7 @@ const NewCounterExample = ({ exampleModal, clickFunction }) => {
 					<X />
 				</Button>
 				<Modal.Title>
-					<h2>Example</h2>
+					<h2>Examples</h2>
 				</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>

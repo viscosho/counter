@@ -2,36 +2,26 @@ import React, { Fragment } from 'react';
 import { Button } from 'react-bootstrap';
 
 const NewExampleChip = () => {
+	const exampleChips = [
+		{ name: 'Drinks', chips: [{ title: 'Cups of coffee' }, { title: 'Glasses of water' }, { title: 'Martinis' }] },
+		{ name: 'Food', chips: [{ title: 'Hot-dogs' }, { title: 'Cupcakes eaten' }, { title: 'Chicken wings' }] },
+		{ name: 'Misc', chips: [{ title: 'Times sneezed' }, { title: 'Naps' }, { title: 'Daydreaming' }] }
+	];
+
 	return (
 		<Fragment>
-			<div>
-				<h3>Drinks</h3>
-				<div className="chip-wrapper">
-					<Button className="chip" variant="secondary">
-						Cups of coffee
-					</Button>
-					<Button className="chip" variant="secondary">
-						Glass of Watter
-					</Button>
-					<Button className="chip" variant="secondary">
-						Martinis
-					</Button>
-				</div>
-			</div>
-			<div>
-				<h3>Drinks</h3>
-				<div className="chip-wrapper">
-					<Button className="chip" variant="secondary">
-						Cups of coffee
-					</Button>
-					<Button className="chip" variant="secondary">
-						Glass of Watter
-					</Button>
-					<Button className="chip" variant="secondary">
-						Martinis
-					</Button>
-				</div>
-			</div>
+			{exampleChips.map((chip) => (
+				<Fragment>
+					<div className="chip-wrapper">
+						<h5>{chip.name}</h5>
+						{chip.chips.map((chip) => (
+							<Button className="chip" variant="secondary">
+								{chip.title}
+							</Button>
+						))}
+					</div>
+				</Fragment>
+			))}
 		</Fragment>
 	);
 };
