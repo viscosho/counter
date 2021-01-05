@@ -131,3 +131,7 @@ We hope your submission is… to die for.
 ### My Notes
 
 - I used Nunito to Replace Avenir Next
+- Using react bootstrap for layout
+- Using bootstrap icons for icons
+- Using react-router-dom for routers
+- using prettier and stylinter and eslint

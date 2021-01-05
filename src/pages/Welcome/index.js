@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import icon from '../assets/img/icon.svg';
+import icon from '../../assets/img/icon.svg';
 import { Col, Container, Image, Row } from 'react-bootstrap';
 
 const Welcome = () => {
