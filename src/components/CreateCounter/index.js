@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
-import NewCounterInput from './components/newCounterInput';
+import NewCounterInput from './components/NewCounterInput';
 
-const index = () => {
+const Index = () => {
 	return (
 		<Fragment>
 			<NewCounterInput />
@@ -9,4 +9,4 @@ const index = () => {
 	);
 };
 
-export default index;
+export default Index;
