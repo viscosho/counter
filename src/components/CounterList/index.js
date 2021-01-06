@@ -1,31 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ListGroup } from 'react-bootstrap';
-import { IncreaseCounter } from '../Api';
+import { OperationCounter } from '../Api';
 
 const CounterList = (item) => {
-	console.log(item);
 	const [counter, setCounter] = useState(item.item.count);
 
 	const oneMore = () => {
+		OperationCounter(item.item.id, 'inc');
 		setCounter(counter + 1);
-		IncreaseCounter(item.item.id)
-			//.then((response) => response.json())
-			.then(console.log);
 	};
 
 	const oneLess = () => {
+		OperationCounter(item.item.id, 'dec');
 		setCounter(counter - 1);
 	};
-
-	useEffect(() => {
-		setTimeout(() => {
-			//console.log(item);
-			//IncreaseCounter(item.item.id)
-			//.then((response) => response.json())
-			//.then(console.log);
-			// .then((data) => setCounter(counter));
-		}, 1000);
-	}, [counter, item.item.id]);
 
 	return (
 		<ListGroup.Item key={item.item.id}>

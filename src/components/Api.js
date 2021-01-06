@@ -20,27 +20,15 @@ export async function CreateCounter(title) {
 	});
 }
 
-export async function IncreaseCounter(id) {
+export async function OperationCounter(id, operation) {
 	const itemId = { id };
-	const incUrl = `${API_URL}/inc`;
-	//console.log(itemId);
-	//console.log(`${API_URL}/inc`);
-	return fetch(incUrl, {
+
+	return fetch(`${API_URL}/${operation}`, {
 		headers: {
 			'Content-Type': 'application/json'
 		},
 		method: 'POST',
 		body: JSON.stringify(itemId)
-	});
-}
-
-export async function DecreaseCounter(id) {
-	return fetch(`${API_URL}/dec`, {
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		method: 'POST',
-		data: { id }
 	});
 }
 
