@@ -2,11 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { ListGroup } from 'react-bootstrap';
 import { IncreaseCounter } from '../Api';
 
-const CounterList = ({ id, title, count }) => {
-	const [counter, setCounter] = useState(count);
+const CounterList = (item) => {
+	console.log(item);
+	const [counter, setCounter] = useState(item.item.count);
 
 	const oneMore = () => {
 		setCounter(counter + 1);
+		IncreaseCounter(item.item.id)
+			//.then((response) => response.json())
+			.then(console.log);
 	};
 
 	const oneLess = () => {
@@ -14,19 +18,21 @@ const CounterList = ({ id, title, count }) => {
 	};
 
 	useEffect(() => {
-		IncreaseCounter(id)
-			.then((response) => response.json())
-			.then((data) => setCounter(counter));
-	}, [counter, id]);
+		setTimeout(() => {
+			//console.log(item);
+			//IncreaseCounter(item.item.id)
+			//.then((response) => response.json())
+			//.then(console.log);
+			// .then((data) => setCounter(counter));
+		}, 1000);
+	}, [counter, item.item.id]);
 
 	return (
-		<ListGroup variant="flush">
-			<ListGroup.Item key={id}>
-				{title} <button onClick={oneLess}>-</button>
-				{counter}
-				<button onClick={oneMore}>+</button>
-			</ListGroup.Item>
-		</ListGroup>
+		<ListGroup.Item key={item.item.id}>
+			{item.item.title} <button onClick={oneLess}>-</button>
+			{counter}
+			<button onClick={oneMore}>+</button>
+		</ListGroup.Item>
 	);
 };
 

@@ -6,50 +6,50 @@ export async function GetCounterList() {
 			'Content-Type': 'application/json',
 			method: 'GET'
 		}
-	}).then((response) => {
-		if (!response.ok) {
-			throw new Error(response.statusText);
-		}
-		return response.json();
 	});
 }
 
 export async function CreateCounter(title) {
+	const itemTitle = { title: 'virginia' };
 	return fetch(API_URL, {
 		headers: {
-			'Content-Type': 'application/json',
-			method: 'POST',
-			data: { title }
-		}
+			'Content-Type': 'application/json'
+		},
+		method: 'POST',
+		body: JSON.stringify(itemTitle)
 	});
 }
 
 export async function IncreaseCounter(id) {
-	return fetch(`${API_URL}/inc`, {
+	const itemId = { id };
+	const incUrl = `${API_URL}/inc`;
+	//console.log(itemId);
+	//console.log(`${API_URL}/inc`);
+	return fetch(incUrl, {
 		headers: {
-			'Content-Type': 'application/json',
-			method: 'POST',
-			data: { id }
-		}
+			'Content-Type': 'application/json'
+		},
+		method: 'POST',
+		body: JSON.stringify(itemId)
 	});
 }
 
 export async function DecreaseCounter(id) {
 	return fetch(`${API_URL}/dec`, {
 		headers: {
-			'Content-Type': 'application/json',
-			method: 'POST',
-			data: { id }
-		}
+			'Content-Type': 'application/json'
+		},
+		method: 'POST',
+		data: { id }
 	});
 }
 
 export async function DeleteCounter(id) {
 	return fetch(API_URL, {
 		headers: {
-			'Content-Type': 'application/json',
-			method: 'DELETE',
-			data: { id }
-		}
+			'Content-Type': 'application/json'
+		},
+		method: 'DELETE',
+		data: { id }
 	});
 }
