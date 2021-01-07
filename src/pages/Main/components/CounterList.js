@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ListGroup } from 'react-bootstrap';
-import { OperationCounter } from '../Api';
+import { OperationCounter } from '../../../components/Api';
 
 const CounterList = (item) => {
 	const [counter, setCounter] = useState(item.item.count);

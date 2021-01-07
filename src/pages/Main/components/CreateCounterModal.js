@@ -8,9 +8,11 @@ const CreateCounterModal = ({ modal, clickFunction, value }) => {
 	const [openExampleModal, setOpenExampleModal] = useState(false);
 
 	const handleExampleClose = () => setOpenExampleModal(false);
+
 	const addCounter = () => {
 		console.log(counterValue);
 		CreateCounter(counterValue);
+		clickFunction();
 	};
 
 	const [counterValue, setCounterValue] = useState('');
