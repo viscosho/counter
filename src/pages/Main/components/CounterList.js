@@ -24,8 +24,8 @@ const CounterList = (item) => {
 
 	return (
 		<ListGroup.Item key={item.item.id} onClick={deleteItem} className={`counter-item d-flex justify-content-between align-items-center mb-1 ${active ? 'item-selected' : null}`}>
-			<p className="p-0 m-0">{item.item.title}</p>
-			<div className="d-flex align-items-center">
+			<p className="p-0 m-0 counter-name">{item.item.title}</p>
+			<div className="d-flex align-items-center counter-actions">
 				<button className="btn-calculation" onClick={oneLess}>
 					-
 				</button>

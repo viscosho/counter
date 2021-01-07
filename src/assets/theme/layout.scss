@@ -1,7 +1,23 @@
+// Welcome Page
+#welcome {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	justify-content: center;
+}
+
+//Main Page
 #main {
 	#main-row {
 		#main-header {
-			//flex-grow: 1;
+			.search-bar {
+				input {
+					border: none;
+					border-radius: $radius;
+					box-shadow: $shadow;
+				}
+			}
 		}
 
 		#main-body {

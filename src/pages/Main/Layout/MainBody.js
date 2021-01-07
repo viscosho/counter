@@ -24,9 +24,9 @@ const MainBody = () => {
 	}, []);
 
 	return (
-		<main>
+		<section>
 			<ListGroup>{counters ? counterList.map((singleCounter) => <CounterList key={singleCounter.id} item={singleCounter} />) : <NoCounters />}</ListGroup>
-		</main>
+		</section>
 	);
 };
 

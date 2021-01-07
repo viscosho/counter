@@ -3,12 +3,9 @@ import { Modal, Button } from 'react-bootstrap';
 
 const DeleteCounterModal = ({ modal, clickFunction }) => {
 	return (
-		<Modal show={modal} onHide={clickFunction} animation={false}>
-			<Modal.Header closeButton></Modal.Header>
-			<Modal.Title>
-				<h2>Delete the “Records played” counter?</h2>
-			</Modal.Title>
-			<Modal.Body>
+		<Modal size="sm" show={modal} onHide={clickFunction} animation={false} aria-labelledby="contained-modal-title-vcenter" centered>
+			<Modal.Body className="text-center">
+				<h3>Delete the “Records played” counter?</h3>
 				<p>This cannot be undone.</p>
 				<Button variant="primary" onClick={clickFunction}>
 					Cancel

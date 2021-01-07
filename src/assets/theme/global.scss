@@ -1,11 +1,4 @@
-// Global Styles
-#welcome {
-	align-items: center;
-	display: flex;
-	flex-direction: column;
-	height: 100vh;
-	justify-content: center;
-}
+// Shared Styles & Helpers
 
 .btn {
 	box-shadow: $shadow;
@@ -13,16 +6,6 @@
 
 .btn-primary {
 	color: #fff;
-}
-
-.counter-item {
-	border: none;
-	border-radius: 6px;
-	padding: 1rem;
-
-	&.item-selected {
-		background-color: rgba($orange, 0.2);
-	}
 }
 
 .btn-calculation {
@@ -53,4 +36,25 @@
 
 .no-shadow {
 	box-shadow: none;
+}
+
+.counter-item {
+	border: none;
+	border-radius: $radius;
+	padding: 1rem;
+
+	&.item-selected {
+		background-color: rgba($orange, 0.2);
+	}
+
+	.counter-name {
+		font-size: 17px;
+	}
+
+	.counter-actions {
+		p {
+			font-size: 20px;
+			font-weight: 600;
+		}
+	}
 }

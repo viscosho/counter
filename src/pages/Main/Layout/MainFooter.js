@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
-import { Plus, Dash } from 'react-bootstrap-icons';
+import { Plus, Trash } from 'react-bootstrap-icons';
 import CreateCounterModal from '../components/CreateCounterModal';
 import DeleteCounterModal from '../components/DeleteCounterModal';
 
@@ -18,7 +18,7 @@ export const MainFooter = () => {
 			<hr />
 			<div className="d-flex justify-content-start">
 				<Button className="pt-0 pb-0 pl-3 pr-3" onClick={() => setOpenDeleteModal(true)}>
-					<Dash />
+					<Trash />
 				</Button>
 				<DeleteCounterModal modal={openDeleteModal} clickFunction={() => handleDeleteClose()} />
 			</div>
