@@ -1,9 +1,20 @@
-import React from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Modal, Button, Form } from 'react-bootstrap';
 import { X } from 'react-bootstrap-icons';
-import CreateCounter from '../../../components/CreateCounter/index';
+import NewCounterExample from './NewCounterExample';
+import { CreateCounter } from '../../../components/Api';
 
-const CreateCounterModal = ({ modal, clickFunction }) => {
+const CreateCounterModal = ({ modal, clickFunction, value }) => {
+	const [openExampleModal, setOpenExampleModal] = useState(false);
+
+	const handleExampleClose = () => setOpenExampleModal(false);
+	const addCounter = () => {
+		console.log(counterValue);
+		CreateCounter(counterValue);
+	};
+
+	const [counterValue, setCounterValue] = useState('');
+
 	return (
 		<Modal show={modal} onHide={clickFunction} animation={false} dialogClassName="modal-100w modal-100h">
 			<Modal.Header closeButton>
@@ -13,12 +24,42 @@ const CreateCounterModal = ({ modal, clickFunction }) => {
 				<Modal.Title>
 					<h2>Create a Counter</h2>
 				</Modal.Title>
-				<Button variant="primary" onClick={clickFunction}>
+				<Button
+					variant="primary"
+					value={counterValue}
+					onClick={(e) => {
+						addCounter(e.target.value);
+					}}
+				>
 					Save
 				</Button>
 			</Modal.Header>
 			<Modal.Body>
-				<CreateCounter />
+				{/* <NewCounterInput onChange={(event) => setCounterValue(event)} value={counterValue} /> */}
+				<Form>
+					<Form.Group controlId="newCounter">
+						<Form.Label>
+							<h4>Name</h4>
+						</Form.Label>
+						<Form.Control
+							type="text"
+							value={counterValue}
+							onChange={(e) => {
+								console.log('e.target.value', e.target.value);
+								setCounterValue(e.target.value);
+							}}
+							placeholder="Cups of Coffee"
+						/>
+
+						<Form.Text className="text-muted">
+							Give it a name. Creative block?
+							<Button className="no-shadow p-0 m-0" variant="link" onClick={() => setOpenExampleModal(true)}>
+								See examples
+							</Button>
+							<NewCounterExample exampleModal={openExampleModal} clickFunction={() => handleExampleClose()} />.
+						</Form.Text>
+					</Form.Group>
+				</Form>
 			</Modal.Body>
 		</Modal>
 	);

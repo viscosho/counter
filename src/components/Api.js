@@ -10,7 +10,7 @@ export async function GetCounterList() {
 }
 
 export async function CreateCounter(title) {
-	const itemTitle = { title: 'virginia' };
+	const itemTitle = { title };
 	return fetch(API_URL, {
 		headers: {
 			'Content-Type': 'application/json'
