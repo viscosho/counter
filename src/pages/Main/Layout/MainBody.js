@@ -16,17 +16,18 @@ const MainBody = () => {
 	};
 
 	useEffect(() => {
-		const interval = setInterval(() => {
-			getPosts();
-		}, 5000);
-		return () => clearInterval(interval);
-	}, [setCounterList]);
+		// const interval = setInterval(() => {
+		// 	getPosts();
+		// }, 5000);
+		// return () => clearInterval(interval);
+		getPosts();
+	}, []);
 
-	return (
-		<section>
-			<ListGroup>{counters ? counterList.map((singleCounter) => <CounterList key={singleCounter.id} item={singleCounter} />) : <NoCounters />}</ListGroup>
-		</section>
-	);
+	// useEffect(() => {
+	// 	console.log('state change');
+	// }, [counterList]);
+
+	return <section>{<ListGroup>{counters ? counterList.map((singleCounter) => <CounterList key={singleCounter.id} item={singleCounter} />) : <NoCounters />}</ListGroup>}</section>;
 };
 
 export default MainBody;
