@@ -6,7 +6,6 @@ import { CreateCounter } from '../../../components/Api';
 
 const CreateCounterModal = ({ modal, clickFunction, value }) => {
 	const [openExampleModal, setOpenExampleModal] = useState(false);
-
 	const handleExampleClose = () => setOpenExampleModal(false);
 
 	const addCounter = () => {

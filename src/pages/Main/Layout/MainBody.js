@@ -6,22 +6,21 @@ import NoCounters from '../components/NoCounters';
 
 const MainBody = () => {
 	const [counters, setCounters] = useState(0);
-	const [counterList, setcounterList] = useState([]);
+	const [counterList, setCounterList] = useState([]);
+
+	const getPosts = () => {
+		GetCounterList().then((json) => {
+			setCounters(json.length);
+			setCounterList(json);
+		});
+	};
 
 	useEffect(() => {
-		GetCounterList().then((json) => {
-			//console.log(json);
-			setCounters(json.length);
-			json.forEach((counterItem) => {
-				let Item = {
-					count: counterItem.count,
-					id: counterItem.id,
-					title: counterItem.title
-				};
-				setcounterList((counterList) => [...counterList, Item]);
-			});
-		});
-	}, []);
+		const interval = setInterval(() => {
+			getPosts();
+		}, 5000);
+		return () => clearInterval(interval);
+	}, [setCounterList]);
 
 	return (
 		<section>

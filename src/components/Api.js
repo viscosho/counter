@@ -1,17 +1,32 @@
 const API_URL = `http://${window.location.hostname}:3001/api/v1/counter`;
 
+// export async function GetCounterList() {
+// 	return fetch(API_URL, {
+// 		headers: {
+// 			'Content-Type': 'application/json',
+// 			method: 'GET'
+// 		}
+// 	}).then((response) => {
+// 		if (!response.ok) {
+// 			throw new Error(response.statusText);
+// 		}
+// 		return response.json();
+// 	});
+// }
+
 export async function GetCounterList() {
-	return fetch(API_URL, {
+	const response = await fetch(API_URL, {
 		headers: {
 			'Content-Type': 'application/json',
 			method: 'GET'
 		}
-	}).then((response) => {
-		if (!response.ok) {
-			throw new Error(response.statusText);
-		}
-		return response.json();
 	});
+	if (!response.ok) {
+		const message = `An error has occurred: ${response.status}`;
+		throw new Error(message);
+	}
+	const theList = await response.json();
+	return theList;
 }
 
 export async function CreateCounter(title) {
@@ -22,6 +37,11 @@ export async function CreateCounter(title) {
 		},
 		method: 'POST',
 		body: JSON.stringify(itemTitle)
+	}).then((response) => {
+		if (!response.ok) {
+			throw new Error(response.statusText);
+		}
+		return response;
 	});
 }
 

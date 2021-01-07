@@ -5,7 +5,7 @@ const DeleteCounterModal = ({ modal, clickFunction }) => {
 	return (
 		<Modal size="sm" show={modal} onHide={clickFunction} animation={false} aria-labelledby="contained-modal-title-vcenter" centered>
 			<Modal.Body className="text-center">
-				<h3>Delete the “Records played” counter?</h3>
+				<h4>Delete the “Records played” counter?</h4>
 				<p>This cannot be undone.</p>
 				<Button variant="primary" onClick={clickFunction}>
 					Cancel
