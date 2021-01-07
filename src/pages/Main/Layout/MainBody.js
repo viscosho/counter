@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { ListGroup } from 'react-bootstrap';
 import { GetCounterList } from '../../../components/Api';
 import CounterList from '../components/CounterList';
 import NoCounters from '../components/NoCounters';
 
-const MainBody = (props) => {
+const MainBody = () => {
 	const [counters, setCounters] = useState(0);
 	const [counterList, setcounterList] = useState([]);
 
@@ -22,7 +23,11 @@ const MainBody = (props) => {
 		});
 	}, []);
 
-	return <main>{counters ? counterList.map((singleCounter) => <CounterList key={singleCounter.id} item={singleCounter} />) : <NoCounters />}</main>;
+	return (
+		<main>
+			<ListGroup>{counters ? counterList.map((singleCounter) => <CounterList key={singleCounter.id} item={singleCounter} />) : <NoCounters />}</ListGroup>
+		</main>
+	);
 };
 
 export default MainBody;

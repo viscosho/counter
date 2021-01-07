@@ -10,7 +10,6 @@ const CreateCounterModal = ({ modal, clickFunction, value }) => {
 	const handleExampleClose = () => setOpenExampleModal(false);
 
 	const addCounter = () => {
-		console.log(counterValue);
 		CreateCounter(counterValue);
 		clickFunction();
 	};
@@ -37,7 +36,6 @@ const CreateCounterModal = ({ modal, clickFunction, value }) => {
 				</Button>
 			</Modal.Header>
 			<Modal.Body>
-				{/* <NewCounterInput onChange={(event) => setCounterValue(event)} value={counterValue} /> */}
 				<Form>
 					<Form.Group controlId="newCounter">
 						<Form.Label>
@@ -47,7 +45,6 @@ const CreateCounterModal = ({ modal, clickFunction, value }) => {
 							type="text"
 							value={counterValue}
 							onChange={(e) => {
-								console.log('e.target.value', e.target.value);
 								setCounterValue(e.target.value);
 							}}
 							placeholder="Cups of Coffee"

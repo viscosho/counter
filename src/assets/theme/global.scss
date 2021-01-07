@@ -15,6 +15,27 @@
 	color: #fff;
 }
 
+.counter-item {
+	border: none;
+	border-radius: 6px;
+	padding: 1rem;
+
+	&.item-selected {
+		background-color: rgba($orange, 0.2);
+	}
+}
+
+.btn-calculation {
+	align-items: center;
+	background: none;
+	border: none;
+	color: $orange;
+	display: flex;
+	font-size: 2rem;
+	height: 1rem;
+	padding: 0 1rem;
+}
+
 .chip-wrapper {
 	overflow-x: auto;
 	padding-bottom: 2rem;
