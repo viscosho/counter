@@ -7,5 +7,5 @@
 	"semi": true,
 	"bracketSpacing": true,
 	"editor.formatOnSave": true,
-	"printWidth": 200
+	"printWidth": 120
 }
