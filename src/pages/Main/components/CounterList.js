@@ -10,6 +10,7 @@ const CounterList = (item, count, handleClick) => {
 		//const currentState = active;
 		setActive(!active);
 		//console.log(active);
+		item.handleClick();
 	};
 
 	const oneMore = () => {
