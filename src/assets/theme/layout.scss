@@ -10,7 +10,11 @@
 //Main Page
 #main {
 	#main-row {
+		height: 100vh;
+
 		#main-header {
+			flex-grow: 1;
+
 			.search-bar {
 				input {
 					border: none;
@@ -21,7 +25,7 @@
 		}
 
 		#main-body {
-			//flex-grow: 5;
+			flex-grow: 5;
 
 			main {
 				height: 100%;
@@ -29,7 +33,7 @@
 		}
 
 		#main-footer {
-			//flex-grow: 1;
+			flex-grow: 1;
 			background: #fff;
 			bottom: 0;
 			max-width: 500px;

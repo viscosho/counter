@@ -9,7 +9,7 @@ const CounterList = (item, count, handleClick) => {
 	const deleteItem = () => {
 		//const currentState = active;
 		setActive(!active);
-		console.log(active);
+		//console.log(active);
 	};
 
 	const oneMore = () => {

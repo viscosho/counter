@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import MainBody from './Layout/MainBody';
-import { MainFooter } from './Layout/MainFooter';
+//import { MainFooter } from './Layout/MainFooter';
 import MainHeader from './Layout/MainHeader';
 
 const Main = () => {
@@ -14,9 +14,9 @@ const Main = () => {
 				<Col id="main-body">
 					<MainBody />
 				</Col>
-				<Col id="main-footer" className="pb-3">
+				{/* <Col id="main-footer" className="pb-3">
 					<MainFooter />
-				</Col>
+				</Col> */}
 			</Row>
 		</Container>
 	);

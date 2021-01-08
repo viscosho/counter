@@ -1,16 +1,36 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import { DeleteCounter } from '../../../components/Api';
 
-const DeleteCounterModal = ({ modal, clickFunction }) => {
+const DeleteCounterModal = ({ id, modal, clickFunction }) => {
+	const deleteCounterItem = () => {
+		DeleteCounter(id);
+		clickFunction();
+	};
+
 	return (
-		<Modal size="sm" show={modal} onHide={clickFunction} animation={false} aria-labelledby="contained-modal-title-vcenter" centered>
+		<Modal
+			size="sm"
+			show={modal}
+			onHide={clickFunction}
+			animation={false}
+			aria-labelledby="contained-modal-title-vcenter"
+			centered
+		>
 			<Modal.Body className="text-center">
-				<h4>Delete the “Records played” counter?</h4>
+				<h4>Delete the {id} counter?</h4>
 				<p>This cannot be undone.</p>
 				<Button variant="primary" onClick={clickFunction}>
 					Cancel
 				</Button>
-				<Button variant="secondary">Delete</Button>
+				<Button
+					variant="secondary"
+					onClick={(id) => {
+						deleteCounterItem(id);
+					}}
+				>
+					Delete
+				</Button>
 			</Modal.Body>
 		</Modal>
 	);

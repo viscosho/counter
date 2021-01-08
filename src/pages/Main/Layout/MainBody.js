@@ -1,15 +1,27 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { ListGroup } from 'react-bootstrap';
+import { ListGroup, Button, Container, Row, Col } from 'react-bootstrap';
 import { GetCounterList } from '../../../components/Api';
 import CounterList from '../components/CounterList';
 import NoCounters from '../components/NoCounters';
+import { Plus, Trash } from 'react-bootstrap-icons';
+import CreateCounterModal from '../components/CreateCounterModal';
+import DeleteCounterModal from '../components/DeleteCounterModal';
 
 const MainBody = () => {
 	const [counters, setCounters] = useState(0);
 	const [counterList, setCounterList] = useState([]);
 
 	const [count, setCount] = useState(0);
-	const increment = () => setCount(count + 1);
+	const [itemSelected, setItemSelected] = useState();
+	const [openModal, setOpenModal] = useState(false);
+	const handleClose = () => setOpenModal(false);
+	const [openDeleteModal, setOpenDeleteModal] = useState(false);
+	const handleDeleteClose = () => setOpenDeleteModal(false);
+
+	const increment = (id) => {
+		setCount(count + 1);
+		setItemSelected(id);
+	};
 
 	const getPosts = () => {
 		GetCounterList().then((json) => {
@@ -24,30 +36,67 @@ const MainBody = () => {
 		// }, 5000);
 		// return () => clearInterval(interval);
 		getPosts();
-	}, []);
-
-	// useEffect(() => {
-	// 	console.log('state change');
-	// }, [counterList]);
+		console.log(itemSelected);
+	}, [itemSelected]);
 
 	return (
-		<section>
-			<p>{counters} items</p>
-			<p>You clicked {count} times</p>
-			{
-				<ListGroup>
-					{counters ? (
-						counterList.map((singleCounter) => (
+		<Fragment>
+			<section>
+				{
+					<ListGroup>
+						{counters ? (
 							<Fragment>
-								<CounterList handleClick={increment} key={singleCounter.id} item={singleCounter} />
+								<p>
+									{counters} items <span>{count} times</span>
+								</p>
+								{counterList.map((singleCounter) => (
+									<CounterList
+										handleClick={() => {
+											increment(singleCounter.id);
+										}}
+										key={singleCounter.id}
+										item={singleCounter}
+									/>
+								))}
 							</Fragment>
-						))
-					) : (
-						<NoCounters />
-					)}
-				</ListGroup>
-			}
-		</section>
+						) : (
+							<NoCounters />
+						)}
+					</ListGroup>
+				}
+			</section>
+			<footer>
+				<hr />
+				<Container>
+					<Row>
+						{itemSelected ? (
+							<Col>
+								<div className="d-flex justify-content-start">
+									<Button className="pt-0 pb-0 pl-3 pr-3" onClick={() => setOpenDeleteModal(true)}>
+										<Trash />
+									</Button>
+									<DeleteCounterModal
+										id={itemSelected}
+										modal={openDeleteModal}
+										clickFunction={() => handleDeleteClose()}
+									/>
+								</div>
+							</Col>
+						) : null}
+
+						<Col>
+							<div className="d-flex justify-content-end">
+								<Button className="pt-0 pb-0 pl-3 pr-3" onClick={() => setOpenModal(true)}>
+									<Plus />
+								</Button>
+
+								<CreateCounterModal modal={openModal} clickFunction={() => handleClose()} />
+							</div>
+						</Col>
+					</Row>
+				</Container>
+			</footer>
+		</Fragment>
 	);
 };
 
