@@ -1,5 +1,4 @@
-import React, { useReducer, useState, useEffect, useCallback, Fragment } from 'react';
-import { reducer, initialState, initialCount } from '../../components/Reducer';
+import React, { useState, useEffect, useCallback, Fragment } from 'react';
 import { ListGroup, Button, Container, Row, Col } from 'react-bootstrap';
 import { Plus, Trash } from 'react-bootstrap-icons';
 import { GetCounterList } from './../../components/Api';
@@ -9,25 +8,31 @@ import NoCounters from './components/NoCounters';
 import CreateCounterModal from './components/CreateCounterModal';
 import DeleteCounterModal from './components/DeleteCounterModal';
 
-const Main = ({ initialCount }) => {
-	const [state, dispatch] = useReducer(reducer, initialState);
+const Main = () => {
+	const [page, setPage] = useState(1);
+
 	const [counters, setCounters] = useState(0);
 	const [counterList, setCounterList] = useState([]);
 	const [count, setCount] = useState(0);
 	const [itemSelected, setItemSelected] = useState();
 	const [openModal, setOpenModal] = useState(false);
-	const handleClose = () => setOpenModal(false);
 	const [openDeleteModal, setOpenDeleteModal] = useState(false);
-	const handleDeleteClose = () => setOpenDeleteModal(false);
+
+	const reloadCounters = () => {
+		setPage(page + 1);
+	};
+
+	const handleClose = () => {
+		setOpenModal(false);
+		reloadCounters();
+	};
+	const handleDeleteClose = () => {
+		setOpenDeleteModal(false);
+		reloadCounters();
+	};
 
 	const increment = (id) => {
-		//setCount(count + 1);
-		//let countTotals = counterList.map((eachCounter) => setCount(countTotals + eachCounter.count));
-
-		//	const countTotals = counterList.reduce((totalCalories, eachCounter) => totalCalories + eachCounter.count, 0);
-		//setCount(countTotals);
 		setItemSelected(id);
-		//console.log(countTotals);
 	};
 
 	const getPosts = () => {
@@ -40,31 +45,15 @@ const Main = ({ initialCount }) => {
 	};
 
 	const fetchBusinesses = useCallback(() => {
-		//const interval = setInterval(() => {
 		getPosts();
-		//}, 5000);
-		//return () => clearInterval(interval);
 	}, []);
 
 	useEffect(() => {
 		fetchBusinesses();
-	}, [fetchBusinesses, state]);
-
-	// useEffect(() => {
-	// 	const interval = setInterval(() => {
-	// 		getPosts();
-	// 	}, 5000);
-	// 	return () => clearInterval(interval);
-	// 	//getPosts();
-	// 	//console.log(itemSelected);
-	// }, [count, itemSelected, getPosts]);
+	}, [fetchBusinesses, page]);
 
 	return (
 		<Container id="main" className="pt-3 pb-3">
-			Count: {state.count}
-			<button onClick={() => dispatch({ type: 'decrement' })}>-</button>
-			<button onClick={() => dispatch({ type: 'increment' })}>+</button>
-			<button onClick={() => dispatch({ type: 'reset', payload: initialCount })}>Reset</button>
 			<Row id="main-row" className="d-flex flex-column align-content-stretch flex-wrap">
 				<Col id="main-header" className="d-flex flex-column justify-content-center text-center">
 					<header>
