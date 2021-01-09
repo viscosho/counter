@@ -53,14 +53,14 @@ const Main = () => {
 		console.log('Calculate Total running');
 	};
 
-	const getData = async () => {
-		GetCounterList().then((json) => {
-			setCounters(json.length);
-			setCounterList(json);
-			console.log('Get post running');
-			calculateTotal(json);
-		});
-	};
+	// const getData = async () => {
+	// 	GetCounterList().then((json) => {
+	// 		setCounters(json.length);
+	// 		setCounterList(json);
+	// 		console.log('Get post running');
+	// 		calculateTotal(json);
+	// 	});
+	// };
 
 	const handleShare = () => {
 		//navigator.clipboard.writeText(JSON.stringify(itemSelectedName));
@@ -76,12 +76,16 @@ const Main = () => {
 	};
 
 	useEffect(() => {
-		const fetchBusinesses = () => {
-			getData();
+		const fetchBusinesses = async () => {
+			GetCounterList().then((json) => {
+				setCounters(json.length);
+				setCounterList(json);
+				console.log('Get post running');
+				calculateTotal(json);
+			});
 		};
 		fetchBusinesses();
 		console.log('Use Effect running');
-		// eslint-disable-next-line
 	}, [page]);
 
 	return (
