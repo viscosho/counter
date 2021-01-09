@@ -20,7 +20,7 @@ const DeleteCounterModal = ({ id, name, modal, clickFunction }) => {
 			<Modal.Body className="text-center">
 				<h4>Delete the "{name}" counter?</h4>
 				<p>This cannot be undone.</p>
-				<Button variant="primary" onClick={clickFunction}>
+				<Button aria-label="Cancel" variant="primary" onClick={clickFunction}>
 					Cancel
 				</Button>
 				<Button

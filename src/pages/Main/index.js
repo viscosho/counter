@@ -53,17 +53,7 @@ const Main = () => {
 		console.log('Calculate Total running');
 	};
 
-	// const getData = async () => {
-	// 	GetCounterList().then((json) => {
-	// 		setCounters(json.length);
-	// 		setCounterList(json);
-	// 		console.log('Get post running');
-	// 		calculateTotal(json);
-	// 	});
-	// };
-
 	const handleShare = () => {
-		//navigator.clipboard.writeText(JSON.stringify(itemSelectedName));
 		navigator.clipboard
 			.writeText(itemSelectedName)
 			.then(() => {
@@ -102,8 +92,9 @@ const Main = () => {
 							<ListGroup>
 								{counters ? (
 									<Fragment>
-										<p>
-											{counters} items <span>{totalItemCount} times</span>
+										<p className="list-recap">
+											<strong>{counters === 1 ? `${counters} item` : `${counters} items`}</strong>{' '}
+											<strong>{totalItemCount === 1 ? `${totalItemCount} time` : `${totalItemCount} times`}</strong>
 										</p>
 										{counterList.map((singleCounter) => (
 											<CounterList
@@ -132,7 +123,12 @@ const Main = () => {
 										<div className="d-flex justify-content-start">
 											<Row>
 												<Col>
-													<Button variant="light" className="d-flex pl-3 pr-3" onClick={() => setOpenDeleteModal(true)}>
+													<Button
+														aria-label="Delete Counter"
+														variant="light"
+														className="d-flex pl-3 pr-3"
+														onClick={() => setOpenDeleteModal(true)}
+													>
 														<Trash color="red" />
 													</Button>
 													<DeleteCounterModal
@@ -157,7 +153,11 @@ const Main = () => {
 																			<p>
 																				<strong>Share 1 counter</strong>
 																			</p>
-																			<Button variant="light" onClick={() => handleShare(itemSelectedName)}>
+																			<Button
+																				aria-label="Share Counter"
+																				variant="light"
+																				onClick={() => handleShare(itemSelectedName)}
+																			>
 																				{copyButtonText}
 																			</Button>
 																		</Col>
@@ -170,7 +170,12 @@ const Main = () => {
 														}
 													>
 														{({ ...triggerHandler }) => (
-															<Button className="d-flex pl-3 pr-3" variant="light" {...triggerHandler}>
+															<Button
+																aria-label="Copy Counter to clipboard"
+																className="d-flex pl-3 pr-3"
+																variant="light"
+																{...triggerHandler}
+															>
 																<BoxArrowInUp />
 															</Button>
 														)}
@@ -183,7 +188,7 @@ const Main = () => {
 
 								<Col>
 									<div className="d-flex justify-content-end">
-										<Button className="d-flex pl-3 pr-3" onClick={() => setOpenModal(true)}>
+										<Button aria-label="Create Counter" className="d-flex pl-3 pr-3" onClick={() => setOpenModal(true)}>
 											<Plus />
 										</Button>
 

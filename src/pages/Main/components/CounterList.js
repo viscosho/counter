@@ -35,11 +35,11 @@ const CounterList = (item, count, handleClick) => {
 		>
 			<p className="p-0 m-0 counter-name">{item.item.title}</p>
 			<div className="d-flex align-items-center counter-actions">
-				<button className="btn-calculation" onClick={oneLess}>
+				<button aria-label="Decrease Counter value" className="btn-calculation" onClick={oneLess}>
 					-
 				</button>
 				<p className="p-0 m-0">{counter}</p>
-				<button className="btn-calculation" onClick={oneMore}>
+				<button aria-label="Increase Counter value" className="btn-calculation" onClick={oneMore}>
 					+
 				</button>
 			</div>

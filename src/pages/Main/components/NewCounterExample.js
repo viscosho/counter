@@ -7,7 +7,7 @@ const NewCounterExample = ({ exampleModal, clickFunction }) => {
 	return (
 		<Modal show={exampleModal} onHide={clickFunction} animation={false} dialogClassName="modal-100w modal-100h">
 			<Modal.Header closeButton>
-				<Button className="modal-close" variant="secondary" onClick={clickFunction}>
+				<Button aria-label="Close" className="modal-close" variant="secondary" onClick={clickFunction}>
 					<X />
 				</Button>
 				<Modal.Title>

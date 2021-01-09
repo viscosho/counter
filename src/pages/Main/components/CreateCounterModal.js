@@ -18,13 +18,14 @@ const CreateCounterModal = ({ modal, clickFunction, value }) => {
 	return (
 		<Modal show={modal} onHide={clickFunction} animation={false} dialogClassName="modal-100w modal-100h">
 			<Modal.Header closeButton>
-				<Button className="modal-close" variant="secondary" onClick={clickFunction}>
+				<Button aria-label="Close" className="modal-close" variant="secondary" onClick={clickFunction}>
 					<X />
 				</Button>
 				<Modal.Title>
 					<h2>Create a Counter</h2>
 				</Modal.Title>
 				<Button
+					aria-label="Save"
 					variant="primary"
 					value={counterValue}
 					onClick={(e) => {
@@ -51,7 +52,12 @@ const CreateCounterModal = ({ modal, clickFunction, value }) => {
 
 						<Form.Text className="text-muted">
 							Give it a name. Creative block?
-							<Button className="no-shadow p-0 m-0" variant="link" onClick={() => setOpenExampleModal(true)}>
+							<Button
+								aria-label="See Examples"
+								className="no-shadow p-0 m-0"
+								variant="link"
+								onClick={() => setOpenExampleModal(true)}
+							>
 								See examples
 							</Button>
 							<NewCounterExample exampleModal={openExampleModal} clickFunction={() => handleExampleClose()} />.

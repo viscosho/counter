@@ -135,3 +135,4 @@ We hope your submission is… to die for.
 - Using bootstrap icons for icons
 - Using react-router-dom for routers
 - using prettier and stylinter and eslint
+- implementing as much accessibility as I know
