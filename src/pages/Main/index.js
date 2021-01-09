@@ -11,17 +11,18 @@ import DeleteCounterModal from './components/DeleteCounterModal';
 
 const Main = () => {
 	const [page, setPage] = useState(1);
-
 	const [counters, setCounters] = useState(0);
 	const [counterList, setCounterList] = useState([]);
-	//const [count, setCount] = useState(0);
+	const [totalItemCount, setTotalItemCount] = useState(0);
 	const [itemSelected, setItemSelected] = useState();
 	const [openModal, setOpenModal] = useState(false);
 	const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
 	const reloadCounters = () => {
 		setPage(page + 1);
+		console.log(page);
 		console.log('Reload counter running');
+		calculateTotal(counterList);
 	};
 
 	const handleClose = () => {
@@ -37,24 +38,34 @@ const Main = () => {
 
 	const increment = (id) => {
 		setItemSelected(id);
-		console.log('Increment running');
+		reloadCounters();
+		console.log('Addition running');
 	};
 
-	const getPosts = async () => {
+	const calculateTotal = (json) => {
+		const totalItemCount = json.reduce((total, item) => {
+			return total + item.count;
+		}, 0);
+		setTotalItemCount(totalItemCount);
+		console.log('Calculate Total running');
+	};
+
+	const getData = async () => {
 		GetCounterList().then((json) => {
 			setCounters(json.length);
 			setCounterList(json);
 			console.log('Get post running');
-			// const countTotal = counterList.reduce((totalCalories, eachCounter) => totalCalories + eachCounter.count, 0);
-			// setCount(countTotal);
+			calculateTotal(json);
 		});
 	};
 
 	useEffect(() => {
 		const fetchBusinesses = () => {
-			getPosts();
+			getData();
 		};
 		fetchBusinesses();
+		console.log('Use Effect running');
+		// eslint-disable-next-line
 	}, [page]);
 
 	return (
@@ -71,10 +82,9 @@ const Main = () => {
 							<ListGroup>
 								{counters ? (
 									<Fragment>
-										{/* <p>
-											{counters} items <span>{count} times</span>
-										</p> */}
-										<p>{counters} items</p>
+										<p>
+											{counters} items <span>{totalItemCount} times</span>
+										</p>
 										{counterList.map((singleCounter) => (
 											<CounterList
 												handleClick={() => {

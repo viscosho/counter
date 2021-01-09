@@ -25,8 +25,8 @@ export async function GetCounterList() {
 		const message = `An error has occurred: ${response.status}`;
 		throw new Error(message);
 	}
-	const theList = await response.json();
-	return theList;
+	const json = await response.json();
+	return json;
 }
 
 export async function CreateCounter(title) {
