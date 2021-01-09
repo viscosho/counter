@@ -38,6 +38,23 @@
 	box-shadow: none;
 }
 
+.share-popover {
+	background: $popover-bg;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+	box-shadow: 0 24px 38px rgba(0, 0, 0, 0.14);
+
+	> .arrow {
+		&::before {
+			border-top-color: rgba(0, 0, 0, 0.1);
+		}
+
+		&::after {
+			border-top-color: $popover-bg;
+		}
+	}
+}
+
 .counter-item {
 	border: none;
 	border-radius: $radius;

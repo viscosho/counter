@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useCallback, Fragment } from 'react';
-import { ListGroup, Button, Container, Row, Col } from 'react-bootstrap';
-import { Plus, Trash } from 'react-bootstrap-icons';
+import React, { useState, useEffect, Fragment } from 'react';
+import paper from '../../assets/img/paper_note.svg';
+import { ListGroup, Button, Container, Row, Col, OverlayTrigger, Popover, Image } from 'react-bootstrap';
+import { Plus, Trash, BoxArrowInUp } from 'react-bootstrap-icons';
 import { GetCounterList } from './../../components/Api';
 import SearchBar from './components/SearchBar';
 import CounterList from './components/CounterList';
@@ -13,44 +14,48 @@ const Main = () => {
 
 	const [counters, setCounters] = useState(0);
 	const [counterList, setCounterList] = useState([]);
-	const [count, setCount] = useState(0);
+	//const [count, setCount] = useState(0);
 	const [itemSelected, setItemSelected] = useState();
 	const [openModal, setOpenModal] = useState(false);
 	const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
 	const reloadCounters = () => {
 		setPage(page + 1);
+		console.log('Reload counter running');
 	};
 
 	const handleClose = () => {
 		setOpenModal(false);
 		reloadCounters();
+		console.log('Handle Close running');
 	};
 	const handleDeleteClose = () => {
 		setOpenDeleteModal(false);
 		reloadCounters();
+		console.log('Handle Delete running');
 	};
 
 	const increment = (id) => {
 		setItemSelected(id);
+		console.log('Increment running');
 	};
 
-	const getPosts = () => {
+	const getPosts = async () => {
 		GetCounterList().then((json) => {
 			setCounters(json.length);
 			setCounterList(json);
-			const countTotal = counterList.reduce((totalCalories, eachCounter) => totalCalories + eachCounter.count, 0);
-			setCount(countTotal);
+			console.log('Get post running');
+			// const countTotal = counterList.reduce((totalCalories, eachCounter) => totalCalories + eachCounter.count, 0);
+			// setCount(countTotal);
 		});
 	};
 
-	const fetchBusinesses = useCallback(() => {
-		getPosts();
-	}, []);
-
 	useEffect(() => {
+		const fetchBusinesses = () => {
+			getPosts();
+		};
 		fetchBusinesses();
-	}, [fetchBusinesses, page]);
+	}, [page]);
 
 	return (
 		<Container id="main" className="pt-3 pb-3">
@@ -66,9 +71,10 @@ const Main = () => {
 							<ListGroup>
 								{counters ? (
 									<Fragment>
-										<p>
+										{/* <p>
 											{counters} items <span>{count} times</span>
-										</p>
+										</p> */}
+										<p>{counters} items</p>
 										{counterList.map((singleCounter) => (
 											<CounterList
 												handleClick={() => {
@@ -94,21 +100,57 @@ const Main = () => {
 								{itemSelected ? (
 									<Col>
 										<div className="d-flex justify-content-start">
-											<Button className="pt-0 pb-0 pl-3 pr-3" onClick={() => setOpenDeleteModal(true)}>
-												<Trash />
-											</Button>
-											<DeleteCounterModal
-												id={itemSelected}
-												modal={openDeleteModal}
-												clickFunction={() => handleDeleteClose()}
-											/>
+											<Row>
+												<Col>
+													<Button variant="light" className="d-flex pl-3 pr-3" onClick={() => setOpenDeleteModal(true)}>
+														<Trash color="red" />
+													</Button>
+													<DeleteCounterModal
+														id={itemSelected}
+														modal={openDeleteModal}
+														clickFunction={() => handleDeleteClose()}
+													/>
+												</Col>
+												<Col>
+													<OverlayTrigger
+														rootClose
+														trigger="click"
+														key="top"
+														placement="top"
+														transition={false}
+														overlay={
+															<Popover id={`popover-positioned-top`} className="share-popover">
+																<Popover.Content>
+																	<Row>
+																		<Col>
+																			<p>
+																				<strong>Share 1 counter</strong>
+																			</p>
+																			<Button variant="light">Copy</Button>
+																		</Col>
+																		<Col>
+																			<Image src={paper} alt="Share" />
+																		</Col>
+																	</Row>
+																</Popover.Content>
+															</Popover>
+														}
+													>
+														{({ ...triggerHandler }) => (
+															<Button className="d-flex pl-3 pr-3" variant="light" {...triggerHandler}>
+																<BoxArrowInUp />
+															</Button>
+														)}
+													</OverlayTrigger>
+												</Col>
+											</Row>
 										</div>
 									</Col>
 								) : null}
 
 								<Col>
 									<div className="d-flex justify-content-end">
-										<Button className="pt-0 pb-0 pl-3 pr-3" onClick={() => setOpenModal(true)}>
+										<Button className="d-flex pl-3 pr-3" onClick={() => setOpenModal(true)}>
 											<Plus />
 										</Button>
 
