@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { DeleteCounter } from '../../../components/Api';
 
-const DeleteCounterModal = ({ id, modal, clickFunction }) => {
+const DeleteCounterModal = ({ id, name, modal, clickFunction }) => {
 	const deleteCounterItem = () => {
 		DeleteCounter(id);
 		clickFunction();
@@ -18,7 +18,7 @@ const DeleteCounterModal = ({ id, modal, clickFunction }) => {
 			centered
 		>
 			<Modal.Body className="text-center">
-				<h4>Delete the {id} counter?</h4>
+				<h4>Delete the "{name}" counter?</h4>
 				<p>This cannot be undone.</p>
 				<Button variant="primary" onClick={clickFunction}>
 					Cancel

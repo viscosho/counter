@@ -14,7 +14,9 @@ const Main = () => {
 	const [counters, setCounters] = useState(0);
 	const [counterList, setCounterList] = useState([]);
 	const [totalItemCount, setTotalItemCount] = useState(0);
-	const [itemSelected, setItemSelected] = useState();
+	const [itemSelectedId, setitemSelectedId] = useState();
+	const [itemSelectedName, setitemSelectedName] = useState('');
+	const [copyButtonText, setCopyButtonText] = useState('Copy');
 	const [openModal, setOpenModal] = useState(false);
 	const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
@@ -36,8 +38,9 @@ const Main = () => {
 		console.log('Handle Delete running');
 	};
 
-	const increment = (id) => {
-		setItemSelected(id);
+	const increment = (id, name) => {
+		setitemSelectedId(id);
+		setitemSelectedName(name);
 		reloadCounters();
 		console.log('Addition running');
 	};
@@ -57,6 +60,19 @@ const Main = () => {
 			console.log('Get post running');
 			calculateTotal(json);
 		});
+	};
+
+	const handleShare = () => {
+		//navigator.clipboard.writeText(JSON.stringify(itemSelectedName));
+		navigator.clipboard
+			.writeText(itemSelectedName)
+			.then(() => {
+				console.log('Copied!');
+				setCopyButtonText('Copied!');
+			})
+			.catch((err) => {
+				console.log('Something went wrong', err);
+			});
 	};
 
 	useEffect(() => {
@@ -88,7 +104,7 @@ const Main = () => {
 										{counterList.map((singleCounter) => (
 											<CounterList
 												handleClick={() => {
-													increment(singleCounter.id);
+													increment(singleCounter.id, singleCounter.title);
 												}}
 												key={singleCounter.id}
 												item={singleCounter}
@@ -107,7 +123,7 @@ const Main = () => {
 						<hr />
 						<Container>
 							<Row>
-								{itemSelected ? (
+								{itemSelectedId ? (
 									<Col>
 										<div className="d-flex justify-content-start">
 											<Row>
@@ -116,7 +132,8 @@ const Main = () => {
 														<Trash color="red" />
 													</Button>
 													<DeleteCounterModal
-														id={itemSelected}
+														id={itemSelectedId}
+														name={itemSelectedName}
 														modal={openDeleteModal}
 														clickFunction={() => handleDeleteClose()}
 													/>
@@ -136,7 +153,9 @@ const Main = () => {
 																			<p>
 																				<strong>Share 1 counter</strong>
 																			</p>
-																			<Button variant="light">Copy</Button>
+																			<Button variant="light" onClick={() => handleShare(itemSelectedName)}>
+																				{copyButtonText}
+																			</Button>
 																		</Col>
 																		<Col>
 																			<Image src={paper} alt="Share" />
