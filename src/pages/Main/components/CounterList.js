@@ -7,9 +7,7 @@ const CounterList = (item, count, handleClick) => {
 	const [active, setActive] = useState(false);
 
 	const deleteItem = () => {
-		//const currentState = active;
 		setActive(!active);
-		//console.log(active);
 		item.handleClick();
 	};
 

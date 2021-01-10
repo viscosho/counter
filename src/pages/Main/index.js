@@ -1,21 +1,20 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect, useCallback, Fragment } from 'react';
 import paper from '../../assets/img/paper_note.svg';
 import { ListGroup, Button, Container, Row, Col, OverlayTrigger, Popover, Image } from 'react-bootstrap';
 import { Plus, Trash, BoxArrowInUp } from 'react-bootstrap-icons';
 import LoadingScreen from './components/LoadingScreen';
-import { GetCounterList } from './../../components/Api';
 import SearchBar from './components/SearchBar';
 import CounterList from './components/CounterList';
 import NoCounters from './components/NoCounters';
 import CreateCounterModal from './components/CreateCounterModal';
 import DeleteCounterModal from './components/DeleteCounterModal';
+import { useFetch } from '../../hooks/useFetch';
 
 const Main = () => {
+	const API_URL = `http://${window.location.hostname}:3001/api/v1/counter`;
+
 	const [page, setPage] = useState(1);
-	const [loading, setLoading] = useState(true);
-	const [counters, setCounters] = useState(0);
-	const [counterList, setCounterList] = useState([]);
-	const [counterNamesList, setCounterNamesList] = useState([]);
+	const { data, loading } = useFetch(page, API_URL);
 	const [totalItemCount, setTotalItemCount] = useState(0);
 	const [itemSelectedId, setitemSelectedId] = useState();
 	const [itemSelectedName, setitemSelectedName] = useState('');
@@ -25,12 +24,8 @@ const Main = () => {
 
 	const reloadCounters = () => {
 		setPage(page + 1);
-		//console.log(page);
 		//console.log('Reload counter running');
-		calculateTotal(counterList);
-		cacheData(counterList);
 	};
-
 	const handleClose = () => {
 		setOpenModal(false);
 		reloadCounters();
@@ -41,28 +36,18 @@ const Main = () => {
 		reloadCounters();
 		//console.log('Handle Delete running');
 	};
-
 	const increment = (id, name) => {
 		setitemSelectedId(id);
 		setitemSelectedName(name);
 		reloadCounters();
 		//console.log('Addition running');
 	};
-
-	const calculateTotal = (json) => {
-		const totalItemCount = json.reduce((total, item) => {
+	const calculateTotal = (data) => {
+		const totalItemCount = data.reduce((total, item) => {
 			return total + item.count;
 		}, 0);
 		setTotalItemCount(totalItemCount);
 		//console.log('Calculate Total running');
-	};
-
-	const cacheData = (json) => {
-		json.forEach((singleCounterNames) => {
-			const unique = (counterNamesList) => [...new Set(counterNamesList), singleCounterNames.title];
-			setCounterNamesList(unique);
-		});
-		//console.log(counterNamesList);
 	};
 
 	const handleShare = () => {
@@ -76,47 +61,40 @@ const Main = () => {
 				//console.log('Something went wrong', err);
 			});
 	};
-
 	const handleSearch = (event) => {
 		console.log(event);
 	};
 
+	const fetchBusinesses = useCallback(() => {
+		calculateTotal(data);
+	}, [data]);
+
 	useEffect(() => {
-		setTimeout(() => setLoading(false), 1000);
-		const fetchBusinesses = async () => {
-			GetCounterList().then((json) => {
-				setCounters(json.length);
-				setCounterList(json);
-				//console.log('Get post running');
-				calculateTotal(json);
-				cacheData(json);
-			});
-		};
 		fetchBusinesses();
 		//console.log('Use Effect running');
-	}, [page]);
+	}, [page, fetchBusinesses]);
 
 	return (
 		<Fragment>
-			{loading === false ? (
+			{!loading ? (
 				<Container id="main" className="pt-3 pb-3">
 					<Row id="main-row" className="d-flex flex-column align-content-stretch flex-wrap">
 						<Col id="main-header" className="d-flex flex-column justify-content-center text-center">
 							<header>
-								<SearchBar state={page} data={counterNamesList} onSearch={handleSearch} />
+								<SearchBar state={page} onSearch={handleSearch} />
 							</header>
 						</Col>
 						<Col id="main-body">
 							<section>
 								{
 									<ListGroup>
-										{counters ? (
+										{data.length ? (
 											<Fragment>
 												<p className="list-recap">
-													<strong>{counters === 1 ? `${counters} item` : `${counters} items`}</strong>{' '}
+													<strong>{data.length === 1 ? `${data.length} item` : `${data.length} items`}</strong>{' '}
 													<strong>{totalItemCount === 1 ? `${totalItemCount} time` : `${totalItemCount} times`}</strong>
 												</p>
-												{counterList.map((singleCounter) => (
+												{data.map((singleCounter) => (
 													<CounterList
 														handleClick={() => {
 															increment(singleCounter.id, singleCounter.title);
@@ -205,7 +183,6 @@ const Main = () => {
 												</div>
 											</Col>
 										) : null}
-
 										<Col>
 											<div className="d-flex justify-content-end">
 												<Button
@@ -215,7 +192,6 @@ const Main = () => {
 												>
 													<Plus />
 												</Button>
-
 												<CreateCounterModal modal={openModal} clickFunction={() => handleClose()} />
 											</div>
 										</Col>

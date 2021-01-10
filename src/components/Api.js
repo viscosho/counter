@@ -1,20 +1,5 @@
 const API_URL = `http://${window.location.hostname}:3001/api/v1/counter`;
 
-export async function GetCounterList() {
-	const response = await fetch(API_URL, {
-		headers: {
-			'Content-Type': 'application/json',
-			method: 'GET'
-		}
-	});
-	if (!response.ok) {
-		const message = `An error has occurred: ${response.status}`;
-		throw new Error(message);
-	}
-	const json = await response.json();
-	return json;
-}
-
 export async function CreateCounter(title) {
 	const itemTitle = { title };
 	return fetch(API_URL, {
