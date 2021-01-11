@@ -137,3 +137,5 @@ We hope your submission is… to die for.
 - using prettier and stylinter and eslint
 - implementing as much accessibility as I know
 - created a custom hook for the fetch to save the data result in its own state
+- don't think its necessary to use css in js because bootstrap components are already styled.
+- Not using Redux or Axios or any third party library yet

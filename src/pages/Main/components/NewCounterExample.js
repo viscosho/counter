@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { X } from 'react-bootstrap-icons';
 
