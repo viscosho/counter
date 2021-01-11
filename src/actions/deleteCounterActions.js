@@ -1,4 +1,6 @@
 import axios from 'axios';
+import API_URL from '../utils/utils';
+
 export const DELETE_COUNTER_REQUEST = 'DELETE_COUNTER_REQUEST';
 export const DELETE_COUNTER_SUCCESS = 'DELETE_COUNTER_SUCCESS';
 export const DELETE_COUNTER_ERROR = 'DELETE_COUNTER_ERROR';
@@ -27,7 +29,7 @@ const deleteCounter = (id) => {
 	return (dispatch) => {
 		dispatch(deleteCounterRequest());
 		axios
-			.delete(`http://${window.location.hostname}:3001/api/v1/counter/`, {
+			.delete(API_URL, {
 				data: { id: id }
 			})
 			.then((response) => {

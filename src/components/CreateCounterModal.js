@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { X } from 'react-bootstrap-icons';
 import NewCounterExample from './NewCounterExample';
-import { CreateCounter } from '../../../components/Api';
+import createCounter from '../actions/addCounterActions';
 
 const CreateCounterModal = ({ modal, clickFunction, value }) => {
 	const dispatch = useDispatch();
@@ -16,7 +16,8 @@ const CreateCounterModal = ({ modal, clickFunction, value }) => {
 	};
 
 	const addCounter = () => {
-		CreateCounter(counterValue);
+		// CreateCounter(counterValue);
+		dispatch(createCounter(counterValue));
 		clickFunction();
 	};
 

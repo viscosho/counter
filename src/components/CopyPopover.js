@@ -1,7 +1,7 @@
 import React from 'react';
 import { OverlayTrigger, Popover, Row, Col, Button, Image } from 'react-bootstrap';
 import { BoxArrowInUp } from 'react-bootstrap-icons';
-import paper from '../../../assets/img/paper_note.svg';
+import paper from '../assets/img/paper_note.svg';
 
 export const CopyPopover = (props) => {
 	//console.log(props);

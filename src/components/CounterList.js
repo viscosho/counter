@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { ListGroup } from 'react-bootstrap';
-import { OperationCounter } from '../../../components/Api';
+import { useDispatch } from 'react-redux';
+import incrementValue from '../actions/incrementCountActions';
+import decrementValue from '../actions/decrementCounterActions';
 
 const CounterList = (props) => {
+	const dispatch = useDispatch();
+
 	//console.log(props);
 	const [counter, setCounter] = useState(props.item.count);
 	const [active, setActive] = useState(false);
@@ -13,13 +17,13 @@ const CounterList = (props) => {
 	};
 
 	const oneMore = () => {
-		OperationCounter(props.item.id, 'inc');
+		dispatch(incrementValue(props.item.id));
 		setCounter(counter + 1);
 		props.handleClick('inc');
 	};
 
 	const oneLess = () => {
-		OperationCounter(props.item.id, 'dec');
+		dispatch(decrementValue(props.item.id));
 		setCounter(counter - 1);
 		props.handleClick('dec');
 	};
@@ -28,9 +32,7 @@ const CounterList = (props) => {
 		<ListGroup.Item
 			key={props.item.id}
 			onClick={deleteItem}
-			className={`counter-item d-flex justify-content-between align-items-center mb-1 ${
-				active ? 'item-selected' : null
-			}`}
+			className={`counter-item d-flex justify-content-between align-items-center mb-1 ${active ? 'item-selected' : null}`}
 		>
 			<p className="p-0 m-0 counter-name">{props.item.title}</p>
 			<div className="d-flex align-items-center counter-actions">

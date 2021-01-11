@@ -1,18 +1,29 @@
 import React, { useState, useEffect, useCallback, Fragment } from 'react';
+import fetchCount from '../../actions/fetchCountersActions';
+import { useDispatch, useSelector } from 'react-redux';
 import { ListGroup, Button, Container, Row, Col } from 'react-bootstrap';
 import { Plus, Trash } from 'react-bootstrap-icons';
-import LoadingScreen from './components/LoadingScreen';
-import SearchBar from './components/SearchBar';
-import CounterList from './components/CounterList';
-import NoCounters from './components/NoCounters';
-import CreateCounterModal from './components/CreateCounterModal';
-import DeleteCounterModal from './components/DeleteCounterModal';
+import LoadingScreen from '../../components/LoadingScreen';
+import SearchBar from '../../components/SearchBar';
+import CounterList from '../../components/CounterList';
+import NoCounters from '../../components/NoCounters';
+import CreateCounterModal from '../../components/CreateCounterModal';
+import DeleteCounterModal from '../../components/DeleteCounterModal';
 import { useFetch } from '../../hooks/useFetch';
-import ListRecap from './components/ListRecap';
-import { CopyPopover } from './components/CopyPopover';
+import ListRecap from '../../components/ListRecap';
+import { CopyPopover } from '../../components/CopyPopover';
 
 const Main = () => {
+	const dispatch = useDispatch();
+	const count_reducer = useSelector((state) => state.api_reducer);
+
+	//console.log(count_reducer.counts);
+
 	const API_URL = `http://${window.location.hostname}:3001/api/v1/counter`;
+
+	useEffect(() => {
+		dispatch(fetchCount());
+	}, [dispatch]);
 
 	const [page, setPage] = useState(1);
 	const { data, loading } = useFetch(page, API_URL);
@@ -30,7 +41,7 @@ const Main = () => {
 
 	const reloadCounters = () => {
 		setPage(page + 1);
-		//console.log('Reload counter running');
+		console.log(page);
 	};
 	const handleClose = () => {
 		setOpenModal(false);
@@ -43,12 +54,6 @@ const Main = () => {
 		//console.log('Handle Delete running');
 	};
 
-	/**
-	 *
-	 * @param {*} id item Id
-	 * @param {*} name item name
-	 * @param {*} operation operation type
-	 */
 	const handleIncDec = (id, name, operation) => {
 		setItemSelectedId(id);
 		setItemSelectedName(name);
@@ -93,13 +98,11 @@ const Main = () => {
 
 	useEffect(() => {
 		fetchBusinesses();
-		//console.log('Use Effect running');
+		console.log('Use Effect running');
 	}, [page, fetchBusinesses]);
 
 	useEffect(() => {
 		setFilteredCountries(data.filter((counter) => counter.title.toLowerCase().includes(search.toLowerCase())));
-		// console.log(filteredCountries);
-		// console.log(searchState);
 	}, [search, data]);
 
 	return (

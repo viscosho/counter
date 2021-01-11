@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import deleteCounter from '../../../actions/deleteCounterActions';
+import deleteCounter from '../actions/deleteCounterActions';
 
 const DeleteCounterModal = ({ id, name, modal, clickFunction }) => {
 	const dispatch = useDispatch();
