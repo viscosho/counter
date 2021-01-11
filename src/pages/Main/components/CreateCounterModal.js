@@ -18,7 +18,7 @@ const CreateCounterModal = ({ modal, clickFunction, value }) => {
 	};
 
 	const callback = (value) => {
-		console.log(value);
+		//console.log(value);
 		setCounterValue(value);
 	};
 
@@ -71,7 +71,7 @@ const CreateCounterModal = ({ modal, clickFunction, value }) => {
 							</Button>
 							<NewCounterExample
 								exampleModal={openExampleModal}
-								parentCallback={() => callback(value)}
+								parentCallback={(value) => callback(value)}
 								clickFunction={() => handleExampleClose()}
 							/>
 						</Form.Text>

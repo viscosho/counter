@@ -2,28 +2,25 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { X } from 'react-bootstrap-icons';
 
-const NewCounterExample = ({ exampleModal, clickFunction, parentCallback, value }) => {
+const NewCounterExample = (props) => {
+	//console.log(props);
 	const exampleChips = [
 		{ name: 'Drinks', chips: [{ title: 'Cups of coffee' }, { title: 'Glasses of water' }, { title: 'Martinis' }] },
 		{ name: 'Food', chips: [{ title: 'Hot-dogs' }, { title: 'Cupcakes eaten' }, { title: 'Chicken wings' }] },
 		{ name: 'Misc', chips: [{ title: 'Times sneezed' }, { title: 'Naps' }, { title: 'Daydreaming' }] }
 	];
 
-	const [chipValue, setChipValue] = useState('');
-
-	const selectChip = (value) => {
-		setChipValue(value);
-		parentCallback(value);
-		console.log(value);
+	const handleClick = (value) => {
+		//console.log(value);
+		props.parentCallback(value);
+		props.clickFunction();
 	};
-
-	useEffect(() => {}, [chipValue, setChipValue]);
 
 	return (
 		<Modal
-			show={exampleModal}
+			show={props.exampleModal}
 			onHide={() => {
-				clickFunction();
+				props.clickFunction();
 			}}
 			animation={false}
 			dialogClassName="modal-100w modal-100h"
@@ -34,7 +31,7 @@ const NewCounterExample = ({ exampleModal, clickFunction, parentCallback, value 
 					className="modal-close"
 					variant="secondary"
 					onClick={() => {
-						clickFunction();
+						props.clickFunction();
 					}}
 				>
 					<X />
@@ -56,7 +53,7 @@ const NewCounterExample = ({ exampleModal, clickFunction, parentCallback, value 
 										className="chip"
 										variant="secondary"
 										onClick={() => {
-											selectChip(chip.title);
+											handleClick(chip.title);
 										}}
 									>
 										{chip.title}
