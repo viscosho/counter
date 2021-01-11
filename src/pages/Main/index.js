@@ -172,11 +172,7 @@ const Main = () => {
 															/>
 														</Col>
 														<Col>
-															<CopyPopover
-																handleSelected={() => handleShare()}
-																text={copyButtonText}
-																itemSelected={itemSelectedName}
-															/>
+															<CopyPopover handleSelected={() => handleShare()} text={copyButtonText} itemSelected={itemSelectedName} />
 														</Col>
 													</Row>
 												</div>
@@ -184,11 +180,7 @@ const Main = () => {
 										) : null}
 										<Col>
 											<div className="d-flex justify-content-end">
-												<Button
-													aria-label="Create Counter"
-													className="d-flex pl-3 pr-3"
-													onClick={() => setOpenModal(true)}
-												>
+												<Button aria-label="Create Counter" className="d-flex pl-3 pr-3" onClick={() => setOpenModal(true)}>
 													<Plus />
 												</Button>
 												<CreateCounterModal modal={openModal} clickFunction={() => handleClose()} />
