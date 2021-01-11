@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export const useFetch = (page, url) => {
-	//const isCurrent = useRef(true);
+	const isCurrent = useRef(true);
 	const [dataState, setDataState] = useState({ data: [], loading: true });
 
-	// useEffect(() => {
-	// 	return () => {
-	// 		isCurrent.current = false;
-	// 	};
-	// }, []);
+	useEffect(() => {
+		return () => {
+			isCurrent.current = false;
+		};
+	}, []);
 
 	useEffect(() => {
 		setDataState({ data: [], loading: true });
@@ -26,13 +26,15 @@ export const useFetch = (page, url) => {
 			})
 			.then((json) => {
 				//setTimeout(() => {
-				//if (isCurrent.current) {
-				setDataState({ data: json, loading: false });
-				//}
+				if (isCurrent.current) {
+					setDataState({ data: json, loading: false });
+				}
 
 				//}, 1000);
 			});
 	}, [page, url, setDataState]);
+
+	//console.log('Fetching Api');
 
 	return dataState;
 };

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback, Fragment } from 'react';
-import paper from '../../assets/img/paper_note.svg';
-import { ListGroup, Button, Container, Row, Col, OverlayTrigger, Popover, Image } from 'react-bootstrap';
-import { Plus, Trash, BoxArrowInUp } from 'react-bootstrap-icons';
+import { ListGroup, Button, Container, Row, Col } from 'react-bootstrap';
+import { Plus, Trash } from 'react-bootstrap-icons';
 import LoadingScreen from './components/LoadingScreen';
 import SearchBar from './components/SearchBar';
 import CounterList from './components/CounterList';
@@ -10,6 +9,7 @@ import CreateCounterModal from './components/CreateCounterModal';
 import DeleteCounterModal from './components/DeleteCounterModal';
 import { useFetch } from '../../hooks/useFetch';
 import ListRecap from './components/ListRecap';
+import { CopyPopover } from './components/CopyPopover';
 
 const Main = () => {
 	const API_URL = `http://${window.location.hostname}:3001/api/v1/counter`;
@@ -42,7 +42,14 @@ const Main = () => {
 		reloadCounters();
 		//console.log('Handle Delete running');
 	};
-	const increment = (id, name, operation) => {
+
+	/**
+	 *
+	 * @param {*} id item Id
+	 * @param {*} name item name
+	 * @param {*} operation operation type
+	 */
+	const handleIncDec = (id, name, operation) => {
 		setItemSelectedId(id);
 		setItemSelectedName(name);
 
@@ -51,10 +58,9 @@ const Main = () => {
 		} else if (operation === 'dec') {
 			setTotalItemCount(totalItemCount - 1);
 		}
-
-		//reloadCounters();
 		//console.log('Addition running');
 	};
+
 	const calculateTotal = (data) => {
 		const totalItemCount = data.reduce((total, item) => {
 			return total + item.count;
@@ -117,7 +123,7 @@ const Main = () => {
 													? data.map((singleCounter) => (
 															<CounterList
 																handleClick={(operation) => {
-																	increment(singleCounter.id, singleCounter.title, operation);
+																	handleIncDec(singleCounter.id, singleCounter.title, operation);
 																}}
 																key={singleCounter.id}
 																item={singleCounter}
@@ -126,7 +132,7 @@ const Main = () => {
 													: filteredCountries.map((singleCounter) => (
 															<CounterList
 																handleClick={(operation) => {
-																	increment(singleCounter.id, singleCounter.title, operation);
+																	handleIncDec(singleCounter.id, singleCounter.title, operation);
 																}}
 																key={singleCounter.id}
 																item={singleCounter}
@@ -166,47 +172,11 @@ const Main = () => {
 															/>
 														</Col>
 														<Col>
-															<OverlayTrigger
-																rootClose
-																trigger="click"
-																key="top"
-																placement="top"
-																transition={false}
-																overlay={
-																	<Popover id={`popover-positioned-top`} className="share-popover">
-																		<Popover.Content>
-																			<Row>
-																				<Col>
-																					<p>
-																						<strong>Share 1 counter</strong>
-																					</p>
-																					<Button
-																						aria-label="Share Counter"
-																						variant="light"
-																						onClick={() => handleShare(itemSelectedName)}
-																					>
-																						{copyButtonText}
-																					</Button>
-																				</Col>
-																				<Col>
-																					<Image src={paper} alt="Share" />
-																				</Col>
-																			</Row>
-																		</Popover.Content>
-																	</Popover>
-																}
-															>
-																{({ ...triggerHandler }) => (
-																	<Button
-																		aria-label="Copy Counter to clipboard"
-																		className="d-flex pl-3 pr-3"
-																		variant="light"
-																		{...triggerHandler}
-																	>
-																		<BoxArrowInUp />
-																	</Button>
-																)}
-															</OverlayTrigger>
+															<CopyPopover
+																handleSelected={() => handleShare()}
+																text={copyButtonText}
+																itemSelected={itemSelectedName}
+															/>
 														</Col>
 													</Row>
 												</div>
