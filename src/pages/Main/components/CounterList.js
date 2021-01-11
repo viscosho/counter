@@ -2,36 +2,37 @@ import React, { useState } from 'react';
 import { ListGroup } from 'react-bootstrap';
 import { OperationCounter } from '../../../components/Api';
 
-const CounterList = (item, count, handleClick) => {
-	const [counter, setCounter] = useState(item.item.count);
+const CounterList = (props) => {
+	//console.log(props);
+	const [counter, setCounter] = useState(props.item.count);
 	const [active, setActive] = useState(false);
 
 	const deleteItem = () => {
 		setActive(!active);
-		item.handleClick();
+		props.handleClick();
 	};
 
 	const oneMore = () => {
-		OperationCounter(item.item.id, 'inc');
+		OperationCounter(props.item.id, 'inc');
 		setCounter(counter + 1);
-		item.handleClick();
+		props.handleClick('inc');
 	};
 
 	const oneLess = () => {
-		OperationCounter(item.item.id, 'dec');
+		OperationCounter(props.item.id, 'dec');
 		setCounter(counter - 1);
-		item.handleClick();
+		props.handleClick('dec');
 	};
 
 	return (
 		<ListGroup.Item
-			key={item.item.id}
+			key={props.item.id}
 			onClick={deleteItem}
 			className={`counter-item d-flex justify-content-between align-items-center mb-1 ${
 				active ? 'item-selected' : null
 			}`}
 		>
-			<p className="p-0 m-0 counter-name">{item.item.title}</p>
+			<p className="p-0 m-0 counter-name">{props.item.title}</p>
 			<div className="d-flex align-items-center counter-actions">
 				<button aria-label="Decrease Counter value" className="btn-calculation" onClick={oneLess}>
 					-

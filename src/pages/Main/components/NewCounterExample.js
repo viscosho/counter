@@ -52,6 +52,7 @@ const NewCounterExample = (props) => {
 										key={chip.title}
 										className="chip"
 										variant="secondary"
+										aria-pressed="true"
 										onClick={() => {
 											handleClick(chip.title);
 										}}

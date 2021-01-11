@@ -9,6 +9,7 @@ import NoCounters from './components/NoCounters';
 import CreateCounterModal from './components/CreateCounterModal';
 import DeleteCounterModal from './components/DeleteCounterModal';
 import { useFetch } from '../../hooks/useFetch';
+import ListRecap from './components/ListRecap';
 
 const Main = () => {
 	const API_URL = `http://${window.location.hostname}:3001/api/v1/counter`;
@@ -21,8 +22,8 @@ const Main = () => {
 
 	const [filteredCountries, setFilteredCountries] = useState([]);
 	const [totalItemCount, setTotalItemCount] = useState(0);
-	const [itemSelectedId, setitemSelectedId] = useState();
-	const [itemSelectedName, setitemSelectedName] = useState('');
+	const [itemSelectedId, setItemSelectedId] = useState();
+	const [itemSelectedName, setItemSelectedName] = useState('');
 	const [copyButtonText, setCopyButtonText] = useState('Copy');
 	const [openModal, setOpenModal] = useState(false);
 	const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -41,9 +42,16 @@ const Main = () => {
 		reloadCounters();
 		//console.log('Handle Delete running');
 	};
-	const increment = (id, name) => {
-		setitemSelectedId(id);
-		setitemSelectedName(name);
+	const increment = (id, name, operation) => {
+		setItemSelectedId(id);
+		setItemSelectedName(name);
+
+		if (operation === 'inc') {
+			setTotalItemCount(totalItemCount + 1);
+		} else if (operation === 'dec') {
+			setTotalItemCount(totalItemCount - 1);
+		}
+
 		//reloadCounters();
 		//console.log('Addition running');
 	};
@@ -104,15 +112,12 @@ const Main = () => {
 									<ListGroup>
 										{data.length ? (
 											<Fragment>
-												<p className="list-recap">
-													<strong>{data.length === 1 ? `${data.length} item` : `${data.length} items`}</strong>{' '}
-													<strong>{totalItemCount === 1 ? `${totalItemCount} time` : `${totalItemCount} times`}</strong>
-												</p>
+												<ListRecap data={data} total={totalItemCount} />
 												{!searchState
 													? data.map((singleCounter) => (
 															<CounterList
-																handleClick={() => {
-																	increment(singleCounter.id, singleCounter.title);
+																handleClick={(operation) => {
+																	increment(singleCounter.id, singleCounter.title, operation);
 																}}
 																key={singleCounter.id}
 																item={singleCounter}
@@ -120,8 +125,8 @@ const Main = () => {
 													  ))
 													: filteredCountries.map((singleCounter) => (
 															<CounterList
-																handleClick={() => {
-																	increment(singleCounter.id, singleCounter.title);
+																handleClick={(operation) => {
+																	increment(singleCounter.id, singleCounter.title, operation);
 																}}
 																key={singleCounter.id}
 																item={singleCounter}
