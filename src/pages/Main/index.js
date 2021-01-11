@@ -94,9 +94,9 @@ const Main = () => {
 					<Row id="main-row" className="d-flex flex-column align-content-stretch flex-wrap">
 						<Col id="main-header" className="d-flex flex-column justify-content-center text-center">
 							<header>
-								<form class="search-bar">
-									<div class="form-group">
-										<label class="d-none form-label" for="formBasicEmail">
+								<form className="search-bar">
+									<div className="form-group">
+										<label className="d-none form-label" htmlFor="formBasicEmail">
 											Search
 										</label>
 										<input
@@ -123,7 +123,6 @@ const Main = () => {
 													<strong>{data.length === 1 ? `${data.length} item` : `${data.length} items`}</strong>{' '}
 													<strong>{totalItemCount === 1 ? `${totalItemCount} time` : `${totalItemCount} times`}</strong>
 												</p>
-
 												{!searchState
 													? data.map((singleCounter) => (
 															<CounterList
