@@ -1,22 +1,18 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import { DeleteCounter } from '../../../components/Api';
+import { useDispatch } from 'react-redux';
+import deleteCounter from '../../../actions/deleteCounterActions';
 
 const DeleteCounterModal = ({ id, name, modal, clickFunction }) => {
+	const dispatch = useDispatch();
+
 	const deleteCounterItem = () => {
-		DeleteCounter(id);
+		dispatch(deleteCounter(id));
 		clickFunction();
 	};
 
 	return (
-		<Modal
-			size="sm"
-			show={modal}
-			onHide={clickFunction}
-			animation={false}
-			aria-labelledby="contained-modal-title-vcenter"
-			centered
-		>
+		<Modal size="sm" show={modal} onHide={clickFunction} animation={false} aria-labelledby="contained-modal-title-vcenter" centered>
 			<Modal.Body className="text-center">
 				<h4>Delete the "{name}" counter?</h4>
 				<p>This cannot be undone.</p>

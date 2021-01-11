@@ -130,12 +130,13 @@ We hope your submission is… to die for.
 
 ### My Notes
 
-- I used Nunito to Replace Avenir Next
-- Using react bootstrap for layout
-- Using bootstrap icons for icons
-- Using react-router-dom for routers
-- using prettier and stylinter and eslint
-- implementing as much accessibility as I know
-- created a custom hook for the fetch to save the data result in its own state
-- don't think its necessary to use css in js because bootstrap components are already styled.
-- Not using Redux or Axios or any third party library yet
+- Using Nunito to Replace Avenir Next and storing it locally.
+- Using react bootstrap for layout.
+- Using bootstrap icons for icons.
+- Using react-router-dom for routers.
+- Using prettier + stylinter + eslint.
+- Implementing as much accessibility as I know.
+- created a custom hook for the fetch to save the data result in its own state.
+- I don't think its necessary to use css in js because bootstrap components are already styled.
+- Using Redux + React Redux for complex states.
+- Using Axios for the api.

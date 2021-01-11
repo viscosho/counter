@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { X } from 'react-bootstrap-icons';
 import NewCounterExample from './NewCounterExample';
 import { CreateCounter } from '../../../components/Api';
 
 const CreateCounterModal = ({ modal, clickFunction, value }) => {
+	const dispatch = useDispatch();
+
 	const [openExampleModal, setOpenExampleModal] = useState(false);
 	const [counterValue, setCounterValue] = useState('');
 
@@ -61,12 +64,7 @@ const CreateCounterModal = ({ modal, clickFunction, value }) => {
 
 						<Form.Text className="text-muted">
 							Give it a name. Creative block?
-							<Button
-								aria-label="See Examples"
-								className="no-shadow p-0 m-0"
-								variant="link"
-								onClick={() => setOpenExampleModal(true)}
-							>
+							<Button aria-label="See Examples" className="no-shadow p-0 m-0" variant="link" onClick={() => setOpenExampleModal(true)}>
 								See examples
 							</Button>
 							<NewCounterExample

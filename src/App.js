@@ -1,6 +1,6 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
-import Routes from './components/Routes';
+import Routes from './routes';
 
 const App = () => {
 	return (
