@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { X } from 'react-bootstrap-icons';
 import NewCounterExample from './NewCounterExample';
@@ -6,14 +6,23 @@ import { CreateCounter } from '../../../components/Api';
 
 const CreateCounterModal = ({ modal, clickFunction, value }) => {
 	const [openExampleModal, setOpenExampleModal] = useState(false);
-	const handleExampleClose = () => setOpenExampleModal(false);
+	const [counterValue, setCounterValue] = useState('');
+
+	const handleExampleClose = () => {
+		setOpenExampleModal(false);
+	};
 
 	const addCounter = () => {
 		CreateCounter(counterValue);
 		clickFunction();
 	};
 
-	const [counterValue, setCounterValue] = useState('');
+	const callback = (value) => {
+		console.log(value);
+		setCounterValue(value);
+	};
+
+	useEffect(() => {}, [counterValue]);
 
 	return (
 		<Modal show={modal} onHide={clickFunction} animation={false} dialogClassName="modal-100w modal-100h">
@@ -27,7 +36,7 @@ const CreateCounterModal = ({ modal, clickFunction, value }) => {
 				<Button
 					aria-label="Save"
 					variant="primary"
-					value={counterValue}
+					value={counterValue || ''}
 					onClick={(e) => {
 						addCounter(e.target.value);
 					}}
@@ -43,7 +52,7 @@ const CreateCounterModal = ({ modal, clickFunction, value }) => {
 						</Form.Label>
 						<Form.Control
 							type="text"
-							value={counterValue}
+							value={counterValue || ''}
 							onChange={(e) => {
 								setCounterValue(e.target.value);
 							}}
@@ -60,7 +69,11 @@ const CreateCounterModal = ({ modal, clickFunction, value }) => {
 							>
 								See examples
 							</Button>
-							<NewCounterExample exampleModal={openExampleModal} clickFunction={() => handleExampleClose()} />.
+							<NewCounterExample
+								exampleModal={openExampleModal}
+								parentCallback={() => callback(value)}
+								clickFunction={() => handleExampleClose()}
+							/>
 						</Form.Text>
 					</Form.Group>
 				</Form>

@@ -3,7 +3,6 @@ import paper from '../../assets/img/paper_note.svg';
 import { ListGroup, Button, Container, Row, Col, OverlayTrigger, Popover, Image } from 'react-bootstrap';
 import { Plus, Trash, BoxArrowInUp } from 'react-bootstrap-icons';
 import LoadingScreen from './components/LoadingScreen';
-import SearchBar from './components/SearchBar';
 import CounterList from './components/CounterList';
 import NoCounters from './components/NoCounters';
 import CreateCounterModal from './components/CreateCounterModal';
@@ -15,6 +14,11 @@ const Main = () => {
 
 	const [page, setPage] = useState(1);
 	const { data, loading } = useFetch(page, API_URL);
+
+	const [search, setSearch] = useState('');
+	const [searchState, setSearchState] = useState(false);
+
+	const [filteredCountries, setFilteredCountries] = useState([]);
 	const [totalItemCount, setTotalItemCount] = useState(0);
 	const [itemSelectedId, setitemSelectedId] = useState();
 	const [itemSelectedName, setitemSelectedName] = useState('');
@@ -39,7 +43,7 @@ const Main = () => {
 	const increment = (id, name) => {
 		setitemSelectedId(id);
 		setitemSelectedName(name);
-		reloadCounters();
+		//reloadCounters();
 		//console.log('Addition running');
 	};
 	const calculateTotal = (data) => {
@@ -62,7 +66,10 @@ const Main = () => {
 			});
 	};
 	const handleSearch = (event) => {
-		console.log(event);
+		setSearch(event);
+		if (event) {
+			setSearchState(true);
+		}
 	};
 
 	const fetchBusinesses = useCallback(() => {
@@ -74,6 +81,12 @@ const Main = () => {
 		//console.log('Use Effect running');
 	}, [page, fetchBusinesses]);
 
+	useEffect(() => {
+		setFilteredCountries(data.filter((counter) => counter.title.toLowerCase().includes(search.toLowerCase())));
+		// console.log(filteredCountries);
+		// console.log(searchState);
+	}, [search, data]);
+
 	return (
 		<Fragment>
 			{!loading ? (
@@ -81,7 +94,23 @@ const Main = () => {
 					<Row id="main-row" className="d-flex flex-column align-content-stretch flex-wrap">
 						<Col id="main-header" className="d-flex flex-column justify-content-center text-center">
 							<header>
-								<SearchBar state={page} onSearch={handleSearch} />
+								<form class="search-bar">
+									<div class="form-group">
+										<label class="d-none form-label" for="formBasicEmail">
+											Search
+										</label>
+										<input
+											id="formBasicEmail"
+											className="form-control search-bar"
+											aria-label="Search"
+											type="search"
+											placeholder="Search Counter"
+											onChange={(event) => {
+												handleSearch(event.target.value);
+											}}
+										/>
+									</div>
+								</form>
 							</header>
 						</Col>
 						<Col id="main-body">
@@ -94,15 +123,26 @@ const Main = () => {
 													<strong>{data.length === 1 ? `${data.length} item` : `${data.length} items`}</strong>{' '}
 													<strong>{totalItemCount === 1 ? `${totalItemCount} time` : `${totalItemCount} times`}</strong>
 												</p>
-												{data.map((singleCounter) => (
-													<CounterList
-														handleClick={() => {
-															increment(singleCounter.id, singleCounter.title);
-														}}
-														key={singleCounter.id}
-														item={singleCounter}
-													/>
-												))}
+
+												{!searchState
+													? data.map((singleCounter) => (
+															<CounterList
+																handleClick={() => {
+																	increment(singleCounter.id, singleCounter.title);
+																}}
+																key={singleCounter.id}
+																item={singleCounter}
+															/>
+													  ))
+													: filteredCountries.map((singleCounter) => (
+															<CounterList
+																handleClick={() => {
+																	increment(singleCounter.id, singleCounter.title);
+																}}
+																key={singleCounter.id}
+																item={singleCounter}
+															/>
+													  ))}
 											</Fragment>
 										) : (
 											<NoCounters />

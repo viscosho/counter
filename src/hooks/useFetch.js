@@ -1,7 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export const useFetch = (page, url) => {
+	//const isCurrent = useRef(true);
 	const [dataState, setDataState] = useState({ data: [], loading: true });
+
+	// useEffect(() => {
+	// 	return () => {
+	// 		isCurrent.current = false;
+	// 	};
+	// }, []);
 
 	useEffect(() => {
 		setDataState({ data: [], loading: true });
@@ -17,8 +24,15 @@ export const useFetch = (page, url) => {
 				}
 				return response.json();
 			})
-			.then((json) => setDataState({ data: json, loading: false }));
-	}, [page, url]);
+			.then((json) => {
+				//setTimeout(() => {
+				//if (isCurrent.current) {
+				setDataState({ data: json, loading: false });
+				//}
+
+				//}, 1000);
+			});
+	}, [page, url, setDataState]);
 
 	return dataState;
 };
