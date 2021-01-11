@@ -1,24 +1,19 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
 
-const SearchBar = ({ onSearch }) => {
-	const handleSearch = (event) => {
-		console.log(event.target.value);
-		// const { value } = event.target;
-		// setSearchValue(value);
-		// const response = getArrayFiltered({
-		//   value: value,
-		//   array: counters,
-		//   key: 'title',
-		// });
-		// onSearch(response);
-	};
-
+const SearchBar = (props) => {
 	return (
 		<Form className="search-bar">
 			<Form.Group controlId="formBasicEmail">
 				<Form.Label className="d-none">Search</Form.Label>
-				<Form.Control type="search" placeholder="Search Counters" onChange={handleSearch} />
+				<Form.Control
+					type="search"
+					aria-label="Search"
+					placeholder="Search Counters"
+					onChange={(event) => {
+						props.onChange(event.target.value);
+					}}
+				/>
 			</Form.Group>
 		</Form>
 	);

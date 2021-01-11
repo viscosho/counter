@@ -3,6 +3,7 @@ import paper from '../../assets/img/paper_note.svg';
 import { ListGroup, Button, Container, Row, Col, OverlayTrigger, Popover, Image } from 'react-bootstrap';
 import { Plus, Trash, BoxArrowInUp } from 'react-bootstrap-icons';
 import LoadingScreen from './components/LoadingScreen';
+import SearchBar from './components/SearchBar';
 import CounterList from './components/CounterList';
 import NoCounters from './components/NoCounters';
 import CreateCounterModal from './components/CreateCounterModal';
@@ -94,23 +95,7 @@ const Main = () => {
 					<Row id="main-row" className="d-flex flex-column align-content-stretch flex-wrap">
 						<Col id="main-header" className="d-flex flex-column justify-content-center text-center">
 							<header>
-								<form className="search-bar">
-									<div className="form-group">
-										<label className="d-none form-label" htmlFor="formBasicEmail">
-											Search
-										</label>
-										<input
-											id="formBasicEmail"
-											className="form-control search-bar"
-											aria-label="Search"
-											type="search"
-											placeholder="Search Counter"
-											onChange={(event) => {
-												handleSearch(event.target.value);
-											}}
-										/>
-									</div>
-								</form>
+								<SearchBar onChange={(value) => handleSearch(value)} />
 							</header>
 						</Col>
 						<Col id="main-body">
