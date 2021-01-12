@@ -31,7 +31,7 @@ const fetchCount = () => {
 		axios
 			.get(API_URL)
 			.then((response) => {
-				dispatch(fetchCountSuccess([response.data]));
+				dispatch(fetchCountSuccess(response.data));
 			})
 			.catch((error) => dispatch(fetchCountError('No connection')));
 	};

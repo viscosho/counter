@@ -9,7 +9,6 @@ import CounterList from '../../components/CounterList';
 import NoCounters from '../../components/NoCounters';
 import CreateCounterModal from '../../components/CreateCounterModal';
 import DeleteCounterModal from '../../components/DeleteCounterModal';
-import { useFetch } from '../../hooks/useFetch';
 import ListRecap from '../../components/ListRecap';
 import { CopyPopover } from '../../components/CopyPopover';
 
@@ -17,21 +16,16 @@ const Main = () => {
 	const dispatch = useDispatch();
 	const count_reducer = useSelector((state) => state.api_reducer);
 
-	//console.log(count_reducer.counts);
-
-	const API_URL = `http://${window.location.hostname}:3001/api/v1/counter`;
+	console.log(count_reducer);
 
 	useEffect(() => {
 		dispatch(fetchCount());
 	}, [dispatch]);
 
-	const [page, setPage] = useState(1);
-	const { data, loading } = useFetch(page, API_URL);
-
 	const [search, setSearch] = useState('');
 	const [searchState, setSearchState] = useState(false);
 
-	const [filteredCountries, setFilteredCountries] = useState([]);
+	const [filteredCounters, setfilteredCounters] = useState([]);
 	const [totalItemCount, setTotalItemCount] = useState(0);
 	const [itemSelectedId, setItemSelectedId] = useState();
 	const [itemSelectedName, setItemSelectedName] = useState('');
@@ -40,8 +34,7 @@ const Main = () => {
 	const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
 	const reloadCounters = () => {
-		setPage(page + 1);
-		console.log(page);
+		console.log('reload counter here');
 	};
 	const handleClose = () => {
 		setOpenModal(false);
@@ -66,11 +59,14 @@ const Main = () => {
 		//console.log('Addition running');
 	};
 
-	const calculateTotal = (data) => {
-		const totalItemCount = data.reduce((total, item) => {
-			return total + item.count;
-		}, 0);
-		setTotalItemCount(totalItemCount);
+	const calculateTotal = (count_reducer) => {
+		if (count_reducer.counts) {
+			const totalItemCount = count_reducer.counts.reduce((total, item) => {
+				return total + item.count;
+			}, 0);
+			setTotalItemCount(totalItemCount);
+		}
+
 		//console.log('Calculate Total running');
 	};
 
@@ -93,21 +89,25 @@ const Main = () => {
 	};
 
 	const fetchBusinesses = useCallback(() => {
-		calculateTotal(data);
-	}, [data]);
+		if (count_reducer.counts) {
+			calculateTotal(count_reducer.counts);
+		}
+	}, [count_reducer]);
 
 	useEffect(() => {
 		fetchBusinesses();
-		console.log('Use Effect running');
-	}, [page, fetchBusinesses]);
+		//console.log('Use Effect running');
+	}, [count_reducer, fetchBusinesses]);
 
 	useEffect(() => {
-		setFilteredCountries(data.filter((counter) => counter.title.toLowerCase().includes(search.toLowerCase())));
-	}, [search, data]);
+		// if (count_reducer.counts) {
+		// 	setfilteredCounters(count_reducer.counts.filter((counter) => counter.title.toLowerCase().includes(search.toLowerCase())));
+		// }
+	}, [search, count_reducer]);
 
 	return (
 		<Fragment>
-			{!loading ? (
+			{!count_reducer.loading ? (
 				<Container id="main" className="pt-3 pb-3">
 					<Row id="main-row" className="d-flex flex-column align-content-stretch flex-wrap">
 						<Col id="main-header" className="d-flex flex-column justify-content-center text-center">
@@ -119,11 +119,11 @@ const Main = () => {
 							<section>
 								{
 									<ListGroup>
-										{data.length ? (
+										{count_reducer.counts && count_reducer.counts.length ? (
 											<Fragment>
-												<ListRecap data={data} total={totalItemCount} />
+												<ListRecap data={count_reducer.counts} total={totalItemCount} />
 												{!searchState
-													? data.map((singleCounter) => (
+													? count_reducer.counts.map((singleCounter) => (
 															<CounterList
 																handleClick={(operation) => {
 																	handleIncDec(singleCounter.id, singleCounter.title, operation);
@@ -132,7 +132,7 @@ const Main = () => {
 																item={singleCounter}
 															/>
 													  ))
-													: filteredCountries.map((singleCounter) => (
+													: filteredCounters.map((singleCounter) => (
 															<CounterList
 																handleClick={(operation) => {
 																	handleIncDec(singleCounter.id, singleCounter.title, operation);

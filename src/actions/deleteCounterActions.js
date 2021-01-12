@@ -33,7 +33,7 @@ const deleteCounter = (id) => {
 				data: { id: id }
 			})
 			.then((response) => {
-				dispatch(deleteCounterSuccess([response.data]));
+				dispatch(deleteCounterSuccess(response.data));
 			})
 			.catch((error) => dispatch(deleteCounterError(`No connection ${error}`)));
 	};

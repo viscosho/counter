@@ -30,7 +30,7 @@ const createCounter = (title) => {
 		dispatch(addCounterRequest());
 		axios
 			.post(API_URL, { title: title })
-			.then((response) => dispatch(addCounterSuccess([response.data])))
+			.then((response) => dispatch(addCounterSuccess(response.data)))
 			.catch((error) => dispatch(addCounterError('No connection')));
 	};
 };

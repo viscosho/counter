@@ -12,7 +12,8 @@ const initialState = {
 	errorChangeValue: '',
 	errorAddCounter: '',
 	errorDeleteCounter: '',
-	counts: []
+	counts: null,
+	message: ''
 };
 
 const count_reducer = (state = initialState, action) => {
@@ -20,90 +21,102 @@ const count_reducer = (state = initialState, action) => {
 		case FETCH_COUNT_REQUEST:
 			return {
 				...state,
-				loading: true
+				loading: true,
+				message: 'Fetch count request'
 			};
 		case FETCH_COUNT_SUCCESS: {
 			return {
 				...state,
 				loading: false,
-				counts: action.payload[0] === '' ? [] : action.payload
+				counts: action.payload === '' ? null : action.payload,
+				message: 'Fetch count success'
 			};
 		}
 		case FETCH_COUNT_ERROR: {
 			return {
 				...state,
-				counts: [],
-				error: action.payload
+				counts: null,
+				error: action.payload,
+				message: 'Fetch count error'
 			};
 		}
 
 		case INCREMENT_VALUE_REQUEST: {
 			return {
 				...state,
-				loadingChangeValue: true
+				loadingChangeValue: true,
+				message: 'Increment value request'
 			};
 		}
 
 		case INCREMENT_VALUE_SUCCESS: {
-			state.counts[0].map((objet) => {
-				if (objet.id === action.payload[0].id) {
-					objet.count = action.payload[0].count;
+			state.counts.map((objet) => {
+				if (objet.id === action.payload.id) {
+					objet.count = action.payload.count;
 				}
 			});
 
 			return {
 				...state,
 				loadingChangeValue: false,
-				counts: state.counts
+				counts: state.counts,
+				message: 'Increment value success'
 			};
 		}
 
 		case INCREMENT_VALUE_ERROR: {
 			return {
 				...state,
-				errorChangeValue: action.payload
+				errorChangeValue: action.payload,
+				message: 'Increment value error'
 			};
 		}
 
 		case DECREMENT_VALUE_REQUEST: {
 			return {
 				...state,
-				loadingChangeValue: true
+				loadingChangeValue: true,
+				message: 'Decrement value request'
 			};
 		}
 
 		case DECREMENT_VALUE_SUCCESS: {
-			state.counts[0].map((objet) => {
-				if (objet.id === action.payload[0].id) {
-					objet.count = action.payload[0].count;
+			state.counts.map((objet) => {
+				if (objet.id === action.payload.id) {
+					objet.count = action.payload.count;
 				}
 			});
 
 			return {
 				...state,
 				loadingChangeValue: false,
-				counts: state.counts
+				counts: state.counts,
+				message: 'Decrement value success'
 			};
 		}
 
 		case DECREMENT_VALUE_ERROR: {
 			return {
 				...state,
-				errorChangeValue: action.payload
+				errorChangeValue: action.payload,
+				message: 'Decrement value error'
 			};
 		}
 
 		case ADD_COUNTER_REQUEST: {
 			return {
 				...state,
-				loadingAddCounter: true
+				loadingAddCounter: true,
+				message: 'Add counter request'
 			};
 		}
 
 		case ADD_COUNTER_SUCCESS: {
 			return {
 				...state,
-				loadingAddCounter: false
+				counts: state.counts.concat(action.payload),
+				loadingAddCounter: false,
+				message: 'Add counter success'
 			};
 		}
 
@@ -111,35 +124,39 @@ const count_reducer = (state = initialState, action) => {
 			return {
 				...state,
 				loadingAddCounter: false,
-				errorAddCounter: action.payload
+				errorAddCounter: action.payload,
+				message: 'Add counter error'
 			};
 		}
 
 		case DELETE_COUNTER_REQUEST: {
 			return {
-				...state
+				...state,
+				message: 'Delete counter request'
 			};
 		}
 
 		case DELETE_COUNTER_SUCCESS: {
-			const newState = [];
-			newState[0] = state.counts[0].filter((item) => item.id !== action.payload[0]);
-
 			return {
 				...state,
-				counts: newState
+				counts: state.counts.filter((item) => item.id !== action.payload),
+				message: 'Delete counter success'
 			};
 		}
 
 		case DELETE_COUNTER_ERROR: {
 			return {
 				...state,
-				errorDeleteCounter: action.payload
+				errorDeleteCounter: action.payload,
+				message: 'Delete counter error'
 			};
 		}
 
 		default:
-			return state;
+			return {
+				state,
+				message: 'Default'
+			};
 	}
 };
 

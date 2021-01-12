@@ -30,7 +30,7 @@ const decrementValue = (item) => {
 		dispatch(decrementValueRequest());
 		axios
 			.post(`${API_URL}/dec/`, { id: item })
-			.then((response) => dispatch(decrementValueSuccess([response.data])))
+			.then((response) => dispatch(decrementValueSuccess(response.data)))
 			.catch((error) => dispatch(decrementValueError(`No connection, error: ${error}`)));
 	};
 };

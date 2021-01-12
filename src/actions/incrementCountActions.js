@@ -30,7 +30,7 @@ const incrementValue = (item) => {
 		dispatch(incrementValueRequest());
 		axios
 			.post(`${API_URL}/inc/`, { id: item })
-			.then((response) => dispatch(incrementValueSuccess([response.data])))
+			.then((response) => dispatch(incrementValueSuccess(response.data)))
 			.catch((error) => dispatch(incrementValueError(`No connection, error: ${error}`)));
 	};
 };
