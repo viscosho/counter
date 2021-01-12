@@ -10,16 +10,20 @@
 //Main Page
 #main {
 	#main-row {
-		height: 100vh;
-
 		#main-header {
-			flex-grow: 1;
-
 			.search-bar {
-				.form-control:disabled,
-				.form-control[readonly] {
-					background-color: #fff;
-					opacity: 0.5;
+				margin-left: auto;
+				margin-right: auto;
+				max-width: 379px;
+
+				.form-control {
+					color: $sub-text;
+
+					&:disabled,
+					&[readonly] {
+						background-color: #fff;
+						opacity: 0.5;
+					}
 				}
 
 				input {
@@ -33,18 +37,20 @@
 		}
 
 		#main-body {
-			flex-grow: 5;
-
 			main {
 				height: 100%;
+			}
+
+			.no-counters {
+				height: 70vh;
 			}
 		}
 
 		#main-footer {
 			background: #fff;
-			bottom: 0;
-			flex-grow: 1;
-			max-width: 500px;
+			bottom: 2rem;
+			left: 50%;
+			margin-left: -50%;
 			position: fixed;
 			width: 100%;
 		}

@@ -1,18 +1,4 @@
-//Font Face
-
-@font-face {
-	font-family: 'nunitoblack';
-	font-style: normal;
-	font-weight: normal;
-	src: url('../fonts/nunito-black-webfont.woff2') format('woff2'), url('../fonts/nunito-black-webfont.woff') format('woff');
-}
-
-@font-face {
-	font-family: 'nunitoblack_italic';
-	font-style: normal;
-	font-weight: normal;
-	src: url('../fonts/nunito-blackitalic-webfont.woff2') format('woff2'), url('../fonts/nunito-blackitalic-webfont.woff') format('woff');
-}
+//Fallback Font Face
 
 @font-face {
 	font-family: 'nunitobold';
@@ -22,59 +8,10 @@
 }
 
 @font-face {
-	font-family: 'nunitobold_italic';
-	font-style: normal;
-	font-weight: normal;
-	src: url('../fonts/nunito-bolditalic-webfont.woff2') format('woff2'), url('../fonts/nunito-bolditalic-webfont.woff') format('woff');
-}
-
-@font-face {
-	font-family: 'nunitoextrabold';
-	font-style: normal;
-	font-weight: normal;
-	src: url('../fonts/nunito-extrabold-webfont.woff2') format('woff2'), url('../fonts/nunito-extrabold-webfont.woff') format('woff');
-}
-
-@font-face {
-	font-family: 'nunitoextrabold_italic';
-	font-style: normal;
-	font-weight: normal;
-	src: url('../fonts/nunito-extrabolditalic-webfont.woff2') format('woff2'), url('../fonts/nunito-extrabolditalic-webfont.woff') format('woff');
-}
-
-@font-face {
-	font-family: 'nunitoextralight';
-	font-style: normal;
-	font-weight: normal;
-	src: url('../fonts/nunito-extralight-webfont.woff2') format('woff2'), url('../fonts/nunito-extralight-webfont.woff') format('woff');
-}
-
-@font-face {
-	font-family: 'nunitoextralight_italic';
-	font-style: normal;
-	font-weight: normal;
-	src: url('../fonts/nunito-extralightitalic-webfont.woff2') format('woff2'), url('../fonts/nunito-extralightitalic-webfont.woff') format('woff');
-}
-
-@font-face {
-	font-family: 'nunitoitalic';
-	font-style: normal;
-	font-weight: normal;
-	src: url('../fonts/nunito-italic-webfont.woff2') format('woff2'), url('../fonts/nunito-italic-webfont.woff') format('woff');
-}
-
-@font-face {
 	font-family: 'nunitolight';
 	font-style: normal;
 	font-weight: normal;
 	src: url('../fonts/nunito-light-webfont.woff2') format('woff2'), url('../fonts/nunito-light-webfont.woff') format('woff');
-}
-
-@font-face {
-	font-family: 'nunitolight_italic';
-	font-style: normal;
-	font-weight: normal;
-	src: url('../fonts/nunito-lightitalic-webfont.woff2') format('woff2'), url('../fonts/nunito-lightitalic-webfont.woff') format('woff');
 }
 
 @font-face {
@@ -91,13 +28,6 @@
 	src: url('../fonts/nunito-semibold-webfont.woff2') format('woff2'), url('../fonts/nunito-semibold-webfont.woff') format('woff');
 }
 
-@font-face {
-	font-family: 'nunitosemibold_italic';
-	font-style: normal;
-	font-weight: normal;
-	src: url('../fonts/nunito-semibolditalic-webfont.woff2') format('woff2'), url('../fonts/nunito-semibolditalic-webfont.woff') format('woff');
-}
-
 // Headings
 
 h1,
@@ -106,7 +36,8 @@ h3,
 h4,
 h5 {
 	color: #000;
-	font-family: 'nunitosemibold';
+	font-family: 'Avenir Next', 'nunitosemibold', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+		sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 h1 {

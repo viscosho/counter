@@ -34,7 +34,7 @@ export const CopyPopover = (props) => {
 			}
 		>
 			{({ ...triggerHandler }) => (
-				<Button aria-label="Copy Counter to clipboard" className="d-flex pl-3 pr-3" variant="light" {...triggerHandler}>
+				<Button aria-label="Copy Counter to clipboard" className="icon-btn share-btn d-flex pl-3 pr-3" variant="light" {...triggerHandler}>
 					<BoxArrowInUp />
 				</Button>
 			)}

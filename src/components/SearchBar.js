@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Form } from 'react-bootstrap';
-import { Search } from 'react-bootstrap-icons';
 
 const SearchBar = (props) => {
 	const count_reducer = useSelector((state) => state.api_reducer);

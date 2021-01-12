@@ -76,14 +76,14 @@ const Main = () => {
 
 	return (
 		<Fragment>
-			<Container id="main" className="pt-3 pb-3">
-				<Row id="main-row" className="d-flex flex-column align-content-stretch flex-wrap">
-					<Col id="main-header" className="d-flex flex-column justify-content-center text-center">
+			<Container id="main" className="p-0 pt-3 pb-3">
+				<Row id="main-row" className="d-flex flex-column flex-wrap">
+					<Col id="main-header" className="text-center">
 						<header>
 							<SearchBar onChange={(value) => handleSearch(value)} />
 						</header>
 					</Col>
-					<Col id="main-body">
+					<Col id="main-body" className="pt-2">
 						{count_reducer.loading && !count_reducer.error ? <LoadingScreen /> : null}
 						{count_reducer.error ? <NoConnection /> : null}
 						{!count_reducer.loading ? (
@@ -119,7 +119,7 @@ const Main = () => {
 							</section>
 						) : null}
 					</Col>
-					<Col>
+					<Col id="main-footer">
 						<footer>
 							<hr />
 							<Container>
@@ -129,7 +129,12 @@ const Main = () => {
 											<div className="d-flex justify-content-start">
 												<Row>
 													<Col>
-														<Button aria-label="Delete Counter" variant="light" className="d-flex pl-3 pr-3" onClick={() => setOpenDeleteModal(true)}>
+														<Button
+															aria-label="Delete Counter"
+															variant="light"
+															className="icon-btn dlt-btn d-flex pl-3 pr-3"
+															onClick={() => setOpenDeleteModal(true)}
+														>
 															<Trash color="red" />
 														</Button>
 														<DeleteCounterModal
@@ -149,7 +154,7 @@ const Main = () => {
 									) : null}
 									<Col>
 										<div className="d-flex justify-content-end">
-											<Button aria-label="Create Counter" className="d-flex pl-3 pr-3" onClick={() => setOpenModal(true)}>
+											<Button aria-label="Create Counter" className="icon-btn p-0 d-flex pl-3 pr-3" onClick={() => setOpenModal(true)}>
 												<Plus />
 											</Button>
 											<CreateCounterModal modal={openModal} clickFunction={() => handleClose()} />

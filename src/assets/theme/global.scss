@@ -1,4 +1,10 @@
 // Shared Styles & Helpers
+b,
+strong {
+	font-family: 'Avenir Next', 'nunitobold', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+		'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+	font-weight: 600;
+}
 
 .btn {
 	box-shadow: $shadow;
@@ -6,6 +12,24 @@
 
 .btn-primary {
 	color: #fff;
+}
+
+.icon-btn {
+	border: 1px solid rgba(0, 0, 0, 0.05);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+	&.dlt-btn,
+	&.share-btn {
+		background: #fff;
+
+		svg {
+			max-height: 15px;
+		}
+	}
+
+	svg {
+		font-size: 2rem;
+	}
 }
 
 .btn-calculation {
@@ -75,18 +99,23 @@
 }
 
 .list-recap {
+	font-size: 17px;
+
 	span {
-		color: #888b90;
+		color: $sub-text;
 	}
 }
 
 .counter-item {
 	border: none;
 	border-radius: $radius;
-	padding: 1rem;
+	padding: 1rem 0;
 
 	&.item-selected {
 		background-color: rgba($orange, 0.2);
+		margin-left: -1rem;
+		margin-right: -1rem;
+		padding: 1rem;
 	}
 
 	.counter-name {
@@ -97,6 +126,8 @@
 		p {
 			font-size: 20px;
 			font-weight: 600;
+			text-align: center;
+			width: 25px;
 		}
 	}
 }
