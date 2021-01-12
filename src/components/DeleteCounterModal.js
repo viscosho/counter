@@ -16,17 +16,20 @@ const DeleteCounterModal = (props) => {
 			<Modal.Body className="text-center">
 				<h4>Delete the "{props.name}" counter?</h4>
 				<p>This cannot be undone.</p>
-				<Button aria-label="Cancel" variant="primary" onClick={props.clickFunction}>
-					Cancel
-				</Button>
-				<Button
-					variant="secondary"
-					onClick={() => {
-						deleteCounterItem(props.id);
-					}}
-				>
-					Delete
-				</Button>
+				<div className="d-flex justify-content-around">
+					<Button aria-label="Cancel" variant="primary" onClick={props.clickFunction}>
+						Cancel
+					</Button>
+					<Button
+						variant="light"
+						className="danger-text"
+						onClick={() => {
+							deleteCounterItem(props.id);
+						}}
+					>
+						Delete
+					</Button>
+				</div>
 			</Modal.Body>
 		</Modal>
 	);

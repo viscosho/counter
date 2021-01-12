@@ -9,9 +9,11 @@ const CreateCounterModalError = (props) => {
 			<Modal.Body className="text-center">
 				<h4>Couldn’t create counter</h4>
 				<p>The Internet connection appears to be offline.</p>
-				<Button aria-label="Cancel" variant="primary" onClick={() => setOpen(false)}>
-					Dismiss
-				</Button>
+				<div className="d-flex justify-content-center">
+					<Button aria-label="Cancel" variant="primary" onClick={() => setOpen(false)}>
+						Dismiss
+					</Button>
+				</div>
 			</Modal.Body>
 		</Modal>
 	);

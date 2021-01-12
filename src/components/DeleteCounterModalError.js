@@ -18,18 +18,19 @@ const DeleteCounterModalError = (props) => {
 			<Modal.Body className="text-center">
 				<h4>Couldn’t delete "{props.name}"</h4>
 				<p>The Internet connection appears to be offline.</p>
-
-				<Button
-					variant="secondary"
-					onClick={() => {
-						deleteCounterItem(props.id);
-					}}
-				>
-					Retry
-				</Button>
-				<Button aria-label="Cancel" variant="primary" onClick={() => setOpen(false)}>
-					Dismiss
-				</Button>
+				<div className="d-flex justify-content-around">
+					<Button
+						variant="secondary"
+						onClick={() => {
+							deleteCounterItem(props.id);
+						}}
+					>
+						Retry
+					</Button>
+					<Button aria-label="Cancel" variant="primary" onClick={() => setOpen(false)}>
+						Dismiss
+					</Button>
+				</div>
 			</Modal.Body>
 		</Modal>
 	);

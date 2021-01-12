@@ -1,8 +1,8 @@
 // Shared Styles & Helpers
 b,
 strong {
-	font-family: 'Avenir Next', 'nunitobold', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
-		'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+	font-family: 'Avenir Next', 'nunitobold', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+		'Segoe UI Symbol', 'Noto Color Emoji';
 	font-weight: 600;
 }
 
@@ -22,6 +22,10 @@ strong {
 .btn-light {
 	border: 1px solid rgba(0, 0, 0, 0.05);
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+	&.danger-text {
+		color: red;
+	}
 
 	&.dlt-btn,
 	&.share-btn {
