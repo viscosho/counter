@@ -54,6 +54,7 @@ const count_reducer = (state = initialState, action) => {
 				if (objet.id === action.payload.id) {
 					objet.count = action.payload.count;
 				}
+				return null;
 			});
 
 			return {
@@ -85,6 +86,7 @@ const count_reducer = (state = initialState, action) => {
 				if (objet.id === action.payload.id) {
 					objet.count = action.payload.count;
 				}
+				return null;
 			});
 
 			return {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import fetchCount from '../../actions/fetchCountersActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { ListGroup, Button, Container, Row, Col } from 'react-bootstrap';
@@ -24,7 +24,6 @@ const Main = () => {
 
 	const [search, setSearch] = useState('');
 	const [searchState, setSearchState] = useState(false);
-
 	const [filteredCounters, setfilteredCounters] = useState([]);
 	const [totalItemCount, setTotalItemCount] = useState(0);
 	const [itemSelectedId, setItemSelectedId] = useState();
@@ -33,54 +32,29 @@ const Main = () => {
 	const [openModal, setOpenModal] = useState(false);
 	const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
-	const reloadCounters = () => {
-		console.log('reload counter here');
-	};
 	const handleClose = () => {
 		setOpenModal(false);
-		reloadCounters();
-		//console.log('Handle Close running');
 	};
 	const handleDeleteClose = () => {
 		setOpenDeleteModal(false);
-		reloadCounters();
-		//console.log('Handle Delete running');
 	};
 
-	const handleIncDec = (id, name, operation) => {
+	const handleIncDec = (id, name) => {
 		setItemSelectedId(id);
 		setItemSelectedName(name);
-
-		if (operation === 'inc') {
-			setTotalItemCount(totalItemCount + 1);
-		} else if (operation === 'dec') {
-			setTotalItemCount(totalItemCount - 1);
-		}
-		//console.log('Addition running');
-	};
-
-	const calculateTotal = (count_reducer) => {
-		if (count_reducer.counts) {
-			const totalItemCount = count_reducer.counts.reduce((total, item) => {
-				return total + item.count;
-			}, 0);
-			setTotalItemCount(totalItemCount);
-		}
-
-		//console.log('Calculate Total running');
 	};
 
 	const handleShare = () => {
 		navigator.clipboard
 			.writeText(itemSelectedName)
 			.then(() => {
-				//console.log('Copied!');
 				setCopyButtonText('Copied!');
 			})
 			.catch((err) => {
-				//console.log('Something went wrong', err);
+				console.log('Something went wrong', err);
 			});
 	};
+
 	const handleSearch = (event) => {
 		setSearch(event);
 		if (event) {
@@ -88,21 +62,14 @@ const Main = () => {
 		}
 	};
 
-	const fetchBusinesses = useCallback(() => {
+	useEffect(() => {
 		if (count_reducer.counts) {
-			calculateTotal(count_reducer.counts);
+			setfilteredCounters(count_reducer.counts.filter((counter) => counter.title.toLowerCase().includes(search.toLowerCase())));
+			const totalItemCount = count_reducer.counts.reduce((total, item) => {
+				return total + item.count;
+			}, 0);
+			setTotalItemCount(totalItemCount);
 		}
-	}, [count_reducer]);
-
-	useEffect(() => {
-		fetchBusinesses();
-		//console.log('Use Effect running');
-	}, [count_reducer, fetchBusinesses]);
-
-	useEffect(() => {
-		// if (count_reducer.counts) {
-		// 	setfilteredCounters(count_reducer.counts.filter((counter) => counter.title.toLowerCase().includes(search.toLowerCase())));
-		// }
 	}, [search, count_reducer]);
 
 	return (
@@ -125,8 +92,8 @@ const Main = () => {
 												{!searchState
 													? count_reducer.counts.map((singleCounter) => (
 															<CounterList
-																handleClick={(operation) => {
-																	handleIncDec(singleCounter.id, singleCounter.title, operation);
+																handleClick={() => {
+																	handleIncDec(singleCounter.id, singleCounter.title);
 																}}
 																key={singleCounter.id}
 																item={singleCounter}
@@ -134,8 +101,8 @@ const Main = () => {
 													  ))
 													: filteredCounters.map((singleCounter) => (
 															<CounterList
-																handleClick={(operation) => {
-																	handleIncDec(singleCounter.id, singleCounter.title, operation);
+																handleClick={() => {
+																	handleIncDec(singleCounter.id, singleCounter.title);
 																}}
 																key={singleCounter.id}
 																item={singleCounter}
