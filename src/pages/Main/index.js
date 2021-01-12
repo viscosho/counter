@@ -7,8 +7,10 @@ import LoadingScreen from '../../components/LoadingScreen';
 import SearchBar from '../../components/SearchBar';
 import CounterList from '../../components/CounterList';
 import NoCounters from '../../components/NoCounters';
+import NoConnection from '../../components/NoConnection';
 import CreateCounterModal from '../../components/CreateCounterModal';
 import DeleteCounterModal from '../../components/DeleteCounterModal';
+import DeleteCounterModalError from '../../components/DeleteCounterModalError';
 import ListRecap from '../../components/ListRecap';
 import { CopyPopover } from '../../components/CopyPopover';
 
@@ -16,7 +18,7 @@ const Main = () => {
 	const dispatch = useDispatch();
 	const count_reducer = useSelector((state) => state.api_reducer);
 
-	//console.log(count_reducer);
+	console.log(count_reducer);
 
 	useEffect(() => {
 		dispatch(fetchCount());
@@ -82,6 +84,8 @@ const Main = () => {
 						</header>
 					</Col>
 					<Col id="main-body">
+						{count_reducer.loading && !count_reducer.error ? <LoadingScreen /> : null}
+						{count_reducer.error ? <NoConnection /> : null}
 						{!count_reducer.loading ? (
 							<section>
 								<ListGroup>
@@ -113,9 +117,7 @@ const Main = () => {
 									)}
 								</ListGroup>
 							</section>
-						) : (
-							<LoadingScreen />
-						)}
+						) : null}
 					</Col>
 					<Col>
 						<footer>
@@ -136,6 +138,7 @@ const Main = () => {
 															modal={openDeleteModal}
 															clickFunction={() => handleDeleteClose()}
 														/>
+														{count_reducer.errorDeleteCounter && <DeleteCounterModalError name={itemSelectedName} modal={openDeleteModal} />}
 													</Col>
 													<Col>
 														<CopyPopover handleSelected={() => handleShare()} text={copyButtonText} itemSelected={itemSelectedName} />
