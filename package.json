@@ -5,6 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "concurrently \"react-scripts start\" \"node server/index.js\"",
+		"test": "jest",
 		"build": "react-scripts build",
 		"predeploy": "npm run build"
 	},
@@ -52,9 +53,17 @@
 		]
 	},
 	"devDependencies": {
+		"@babel/preset-env": "^7.12.11",
+		"@babel/preset-react": "^7.12.10",
 		"eslint": "^6.6.0",
+		"jest": "^24.9.0",
+		"jest-environment-jsdom-sixteen": "^1.0.3",
 		"prettier": "2.2.1",
+		"react-test-renderer": "^17.0.1",
 		"stylelint": "^13.8.0",
 		"stylelint-config-sass-guidelines": "^7.1.0"
+	},
+	"resolutions": {
+		"jest-environment-jsdom": "^26.0.1"
 	}
 }

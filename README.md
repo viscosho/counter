@@ -141,3 +141,6 @@ We hope your submission is… to die for.
 - Using Axios for the api.
 - I did a custom hook to detect if the app is visualized on iOS or Android and do something.
 - I started this project trying to make it super simple and not using Redux for state handling, once it got more complex I decided to use redux, then I started refactoring code, but I know there are some things that could still be refactored if I had more time for it (not passing that much props to child components, instead looking at the app state).
+- I do not know that much about testing, but in the process I started to research about it and I'm leaving here a single test that has a snapshot that test if the <NoCounters> component renders correctly. with given time I could definitely implement a lot more tests.
+- I choose a simple architecture for this project, since I use Bootstrap I created very specific css and it was just a few lines of code, so there is no need for a css file for each component. Everything is grouped on their respective folders (actions, reducers, components, etc)
+- For demonstration reasons I uploaded the build folder to my repository, so you can see the production build too.
