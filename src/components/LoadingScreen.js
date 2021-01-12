@@ -3,7 +3,7 @@ import { Col, Container, Row, Spinner } from 'react-bootstrap';
 
 const LoadingScreen = () => {
 	return (
-		<Container className="d-flex flex-column justify-content-center align-items-center h-100">
+		<Container className="loading d-flex flex-column justify-content-center align-items-center">
 			<Row>
 				<Col className="loading-spinner d-flex flex-column justify-content-center align-items-center">
 					<Spinner className="d-flex flex-column justify-content-center align-items-center" animation="grow" variant="primary" role="status">
