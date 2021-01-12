@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ListGroup } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import incrementValue from '../actions/incrementCountActions';
 import decrementValue from '../actions/decrementCounterActions';
 

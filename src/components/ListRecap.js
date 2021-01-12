@@ -5,6 +5,7 @@ import { ArrowClockwise } from 'react-bootstrap-icons';
 const ListRecap = (props) => {
 	//console.log(props);
 	const count_reducer = useSelector((state) => state.api_reducer);
+	// console.log(count_reducer);
 
 	return (
 		<div>

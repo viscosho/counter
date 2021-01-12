@@ -11,6 +11,7 @@ import NoConnection from '../../components/NoConnection';
 import CreateCounterModal from '../../components/CreateCounterModal';
 import DeleteCounterModal from '../../components/DeleteCounterModal';
 import DeleteCounterModalError from '../../components/DeleteCounterModalError';
+import UpdateCounterModalError from '../../components/UpdateCounterModalError';
 import ListRecap from '../../components/ListRecap';
 import { CopyPopover } from '../../components/CopyPopover';
 
@@ -86,9 +87,10 @@ const Main = () => {
 					<Col id="main-body" className="pt-2">
 						{count_reducer.loading && !count_reducer.error ? <LoadingScreen /> : null}
 						{count_reducer.error ? <NoConnection /> : null}
+						{count_reducer.errorChangeValue && <UpdateCounterModalError name={itemSelectedName} />}
 						{!count_reducer.loading ? (
 							<section>
-								<ListGroup>
+								<ListGroup className={searchState && filteredCounters.length === 0 ? 'no-results' : ''}>
 									{count_reducer.counts && count_reducer.counts.length ? (
 										<Fragment>
 											<ListRecap data={count_reducer.counts} total={totalItemCount} />
@@ -111,6 +113,7 @@ const Main = () => {
 															item={singleCounter}
 														/>
 												  ))}
+											{filteredCounters.length === 0 && <p>No Results</p>}
 										</Fragment>
 									) : (
 										<NoCounters />
