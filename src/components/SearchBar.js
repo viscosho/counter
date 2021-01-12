@@ -7,14 +7,9 @@ const SearchBar = (props) => {
 
 	const [enabled, setEnabled] = useState(false);
 	const [focused, setFocused] = useState(false);
-	const [value, setValue] = useState(false);
 
 	const enableCancelButton = () => {
 		setFocused(true);
-	};
-
-	const handleCancel = () => {
-		setValue(true);
 	};
 
 	useEffect(() => {
@@ -43,7 +38,7 @@ const SearchBar = (props) => {
 				/>
 			</Form.Group>
 			{focused && (
-				<Button variant="light" className="ml-3" onClick={() => handleCancel()}>
+				<Button variant="light" className="ml-3">
 					Cancel
 				</Button>
 			)}

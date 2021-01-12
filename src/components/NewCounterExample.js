@@ -3,7 +3,6 @@ import { Modal, Button } from 'react-bootstrap';
 import { X } from 'react-bootstrap-icons';
 
 const NewCounterExample = (props) => {
-	//console.log(props);
 	const exampleChips = [
 		{ name: 'Drinks', chips: [{ title: 'Cups of coffee' }, { title: 'Glasses of water' }, { title: 'Martinis' }] },
 		{ name: 'Food', chips: [{ title: 'Hot-dogs' }, { title: 'Cupcakes eaten' }, { title: 'Chicken wings' }] },
@@ -11,7 +10,6 @@ const NewCounterExample = (props) => {
 	];
 
 	const handleClick = (value) => {
-		//console.log(value);
 		props.parentCallback(value);
 		props.clickFunction();
 	};

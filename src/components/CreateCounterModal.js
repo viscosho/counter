@@ -28,12 +28,12 @@ const CreateCounterModal = (props) => {
 
 	return (
 		<Modal show={props.modal} onHide={props.clickFunction} animation={false} dialogClassName="modal-100w modal-100h">
-			<Modal.Header closeButton>
-				<Button aria-label="Close" className="modal-close" variant="secondary" onClick={props.clickFunction}>
+			<Modal.Header>
+				<Button aria-label="Close" className="modal-close mr-3" variant="secondary" onClick={props.clickFunction}>
 					<X />
 				</Button>
 				<Modal.Title>
-					<h2>Create a Counter</h2>
+					<h2 className="mr-3">Create a Counter</h2>
 				</Modal.Title>
 				<Button
 					aria-label="Save"
@@ -65,11 +65,7 @@ const CreateCounterModal = (props) => {
 							<Button aria-label="See Examples" className="no-shadow p-0 m-0" variant="link" onClick={() => setOpenExampleModal(true)}>
 								See examples
 							</Button>
-							<NewCounterExample
-								exampleModal={openExampleModal}
-								parentCallback={(value) => callback(value)}
-								clickFunction={() => handleExampleClose()}
-							/>
+							<NewCounterExample exampleModal={openExampleModal} parentCallback={(value) => callback(value)} clickFunction={() => handleExampleClose()} />
 						</Form.Text>
 					</Form.Group>
 				</Form>

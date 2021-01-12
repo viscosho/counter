@@ -29,8 +29,8 @@ $container-max-widths: (
 }
 
 //Fonts
-$font-family-sans-serif: 'Avenir Next', 'nunitolight', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-	sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !default;
+$font-family-sans-serif: 'Avenir Next', 'nunitolight', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+	'Segoe UI Symbol', 'Noto Color Emoji' !default;
 
 //Buttons
 $input-btn-padding-y: 0.5rem !default;
@@ -73,6 +73,11 @@ $btn-font-weight: 600;
 
 	.modal-header {
 		border-bottom: 1px solid rgba(196, 196, 196, 0.15);
+
+		.modal-title {
+			justify-self: left;
+			width: 100%;
+		}
 	}
 
 	.modal-content {

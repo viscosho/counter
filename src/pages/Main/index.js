@@ -12,14 +12,14 @@ import CreateCounterModal from '../../components/CreateCounterModal';
 import DeleteCounterModal from '../../components/DeleteCounterModal';
 import DeleteCounterModalError from '../../components/DeleteCounterModalError';
 import UpdateCounterModalError from '../../components/UpdateCounterModalError';
+import CreateCounterModalError from '../../components/CreateCounterModalError';
 import ListRecap from '../../components/ListRecap';
 import { CopyPopover } from '../../components/CopyPopover';
 
 const Main = () => {
 	const dispatch = useDispatch();
 	const count_reducer = useSelector((state) => state.api_reducer);
-
-	// console.log(count_reducer);
+	console.log(count_reducer);
 
 	useEffect(() => {
 		dispatch(fetchCount());
@@ -88,6 +88,7 @@ const Main = () => {
 						{count_reducer.loading && !count_reducer.error ? <LoadingScreen /> : null}
 						{count_reducer.error ? <NoConnection /> : null}
 						{count_reducer.errorChangeValue && <UpdateCounterModalError name={itemSelectedName} />}
+						{count_reducer.errorAddCounter && <CreateCounterModalError />}
 						{!count_reducer.loading ? (
 							<section>
 								<ListGroup className={searchState && filteredCounters.length === 0 ? 'no-results' : ''}>
@@ -132,20 +133,10 @@ const Main = () => {
 											<div className="d-flex justify-content-start">
 												<Row>
 													<Col>
-														<Button
-															aria-label="Delete Counter"
-															variant="light"
-															className="icon-btn dlt-btn d-flex pl-3 pr-3"
-															onClick={() => setOpenDeleteModal(true)}
-														>
+														<Button aria-label="Delete Counter" variant="light" className="icon-btn dlt-btn d-flex pl-3 pr-3" onClick={() => setOpenDeleteModal(true)}>
 															<Trash color="red" />
 														</Button>
-														<DeleteCounterModal
-															id={itemSelectedId}
-															name={itemSelectedName}
-															modal={openDeleteModal}
-															clickFunction={() => handleDeleteClose()}
-														/>
+														<DeleteCounterModal id={itemSelectedId} name={itemSelectedName} modal={openDeleteModal} clickFunction={() => handleDeleteClose()} />
 														{count_reducer.errorDeleteCounter && <DeleteCounterModalError name={itemSelectedName} modal={openDeleteModal} />}
 													</Col>
 													<Col>

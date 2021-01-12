@@ -5,6 +5,7 @@ import { Button, Col, Row } from 'react-bootstrap';
 
 const NoConnection = () => {
 	const dispatch = useDispatch();
+
 	const onRetry = () => {
 		dispatch(fetchCount());
 	};

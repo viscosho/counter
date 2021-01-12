@@ -140,3 +140,4 @@ We hope your submission is… to die for.
 - Using Redux + React Redux for complex states.
 - Using Axios for the api.
 - I did a custom hook to detect if the app is visualized on iOS or Android and do something.
+- I started this project trying to make it super simple and not using Redux for state handling, once it got more complex I decided to use redux, then I started refactoring code, but I know there are some things that could still be refactored if I had more time for it (not passing that much props to child components, instead looking at the app state).
