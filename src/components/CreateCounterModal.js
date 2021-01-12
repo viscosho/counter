@@ -5,7 +5,7 @@ import { X } from 'react-bootstrap-icons';
 import NewCounterExample from './NewCounterExample';
 import createCounter from '../actions/addCounterActions';
 
-const CreateCounterModal = ({ modal, clickFunction, value }) => {
+const CreateCounterModal = (props) => {
 	const dispatch = useDispatch();
 
 	const [openExampleModal, setOpenExampleModal] = useState(false);
@@ -16,22 +16,20 @@ const CreateCounterModal = ({ modal, clickFunction, value }) => {
 	};
 
 	const addCounter = () => {
-		// CreateCounter(counterValue);
 		dispatch(createCounter(counterValue));
-		clickFunction();
+		props.clickFunction();
 	};
 
 	const callback = (value) => {
-		//console.log(value);
 		setCounterValue(value);
 	};
 
 	useEffect(() => {}, [counterValue]);
 
 	return (
-		<Modal show={modal} onHide={clickFunction} animation={false} dialogClassName="modal-100w modal-100h">
+		<Modal show={props.modal} onHide={props.clickFunction} animation={false} dialogClassName="modal-100w modal-100h">
 			<Modal.Header closeButton>
-				<Button aria-label="Close" className="modal-close" variant="secondary" onClick={clickFunction}>
+				<Button aria-label="Close" className="modal-close" variant="secondary" onClick={props.clickFunction}>
 					<X />
 				</Button>
 				<Modal.Title>
@@ -62,7 +60,6 @@ const CreateCounterModal = ({ modal, clickFunction, value }) => {
 							}}
 							placeholder="Cups of Coffee"
 						/>
-
 						<Form.Text className="text-muted">
 							Give it a name. Creative block?
 							<Button aria-label="See Examples" className="no-shadow p-0 m-0" variant="link" onClick={() => setOpenExampleModal(true)}>

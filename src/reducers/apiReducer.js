@@ -6,8 +6,7 @@ import { DELETE_COUNTER_ERROR, DELETE_COUNTER_REQUEST, DELETE_COUNTER_SUCCESS } 
 
 const initialState = {
 	loading: false,
-	loadingChangeValue: false,
-	loadingAddCounter: false,
+	loadingInternal: false,
 	error: '',
 	errorChangeValue: '',
 	errorAddCounter: '',
@@ -44,7 +43,7 @@ const count_reducer = (state = initialState, action) => {
 		case INCREMENT_VALUE_REQUEST: {
 			return {
 				...state,
-				loadingChangeValue: true,
+				loadingInternal: true,
 				message: 'Increment value request'
 			};
 		}
@@ -59,7 +58,7 @@ const count_reducer = (state = initialState, action) => {
 
 			return {
 				...state,
-				loadingChangeValue: false,
+				loadingInternal: false,
 				counts: state.counts,
 				message: 'Increment value success'
 			};
@@ -76,7 +75,7 @@ const count_reducer = (state = initialState, action) => {
 		case DECREMENT_VALUE_REQUEST: {
 			return {
 				...state,
-				loadingChangeValue: true,
+				loadingInternal: true,
 				message: 'Decrement value request'
 			};
 		}
@@ -91,7 +90,7 @@ const count_reducer = (state = initialState, action) => {
 
 			return {
 				...state,
-				loadingChangeValue: false,
+				loadingInternal: false,
 				counts: state.counts,
 				message: 'Decrement value success'
 			};
@@ -108,7 +107,7 @@ const count_reducer = (state = initialState, action) => {
 		case ADD_COUNTER_REQUEST: {
 			return {
 				...state,
-				loadingAddCounter: true,
+				loadingInternal: true,
 				message: 'Add counter request'
 			};
 		}
@@ -117,7 +116,7 @@ const count_reducer = (state = initialState, action) => {
 			return {
 				...state,
 				counts: state.counts.concat(action.payload),
-				loadingAddCounter: false,
+				loadingInternal: false,
 				message: 'Add counter success'
 			};
 		}
@@ -125,7 +124,7 @@ const count_reducer = (state = initialState, action) => {
 		case ADD_COUNTER_ERROR: {
 			return {
 				...state,
-				loadingAddCounter: false,
+				loadingInternal: false,
 				errorAddCounter: action.payload,
 				message: 'Add counter error'
 			};

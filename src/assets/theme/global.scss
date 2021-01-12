@@ -38,6 +38,25 @@
 	box-shadow: none;
 }
 
+.loading-spinner {
+	> div {
+		color: rgba($orange, 0.2) !important;
+		height: 7.125rem;
+		width: 7.125rem;
+
+		> div {
+			color: rgba($orange, 0.2) !important;
+			height: 4.375rem;
+			width: 4.375rem;
+
+			> div {
+				height: 2.875rem;
+				width: 2.875rem;
+			}
+		}
+	}
+}
+
 .share-popover {
 	background: $popover-bg;
 	border: 1px solid rgba(0, 0, 0, 0.1);
