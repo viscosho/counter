@@ -16,10 +16,18 @@
 			flex-grow: 1;
 
 			.search-bar {
+				.form-control:disabled,
+				.form-control[readonly] {
+					background-color: #fff;
+					opacity: 0.5;
+				}
+
 				input {
-					border: none;
-					border-radius: $radius;
-					box-shadow: $shadow;
+					&:not(:focus) {
+						border: none;
+						border-radius: $radius;
+						box-shadow: $shadow;
+					}
 				}
 			}
 		}

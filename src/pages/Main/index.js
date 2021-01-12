@@ -18,7 +18,7 @@ const Main = () => {
 	const dispatch = useDispatch();
 	const count_reducer = useSelector((state) => state.api_reducer);
 
-	console.log(count_reducer);
+	//console.log(count_reducer);
 
 	useEffect(() => {
 		dispatch(fetchCount());
@@ -125,7 +125,7 @@ const Main = () => {
 							<Container>
 								<Row>
 									{itemSelectedId ? (
-										<Col>
+										<Col xs={8}>
 											<div className="d-flex justify-content-start">
 												<Row>
 													<Col>
