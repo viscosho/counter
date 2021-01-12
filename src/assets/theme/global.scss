@@ -6,6 +6,10 @@ strong {
 	font-weight: 600;
 }
 
+.primary-color {
+	color: $orange;
+}
+
 .btn {
 	box-shadow: $shadow;
 }
@@ -100,8 +104,9 @@ strong {
 
 .list-recap {
 	font-size: 17px;
+	font-weight: 500;
 
-	span {
+	span:not(.primary-color) {
 		color: $sub-text;
 	}
 }
@@ -110,6 +115,14 @@ strong {
 	border: none;
 	border-radius: $radius;
 	padding: 1rem 0;
+
+	&.count-0 {
+		.counter-actions {
+			p {
+				color: $sub-text;
+			}
+		}
+	}
 
 	&.item-selected {
 		background-color: rgba($orange, 0.2);

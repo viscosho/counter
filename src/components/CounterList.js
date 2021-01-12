@@ -32,7 +32,7 @@ const CounterList = (props) => {
 		<ListGroup.Item
 			key={props.item.id}
 			onClick={deleteItem}
-			className={`counter-item d-flex justify-content-between align-items-center mb-1 ${active ? 'item-selected' : null}`}
+			className={`counter-item d-flex justify-content-between align-items-center mb-1 count-${counter} ${active ? 'item-selected' : ''}`}
 		>
 			<p className="p-0 m-0 counter-name">{props.item.title}</p>
 			<div className="d-flex align-items-center counter-actions">

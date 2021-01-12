@@ -18,7 +18,7 @@ const Main = () => {
 	const dispatch = useDispatch();
 	const count_reducer = useSelector((state) => state.api_reducer);
 
-	//console.log(count_reducer);
+	// console.log(count_reducer);
 
 	useEffect(() => {
 		dispatch(fetchCount());

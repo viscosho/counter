@@ -28,6 +28,12 @@
 	src: url('../fonts/nunito-semibold-webfont.woff2') format('woff2'), url('../fonts/nunito-semibold-webfont.woff') format('woff');
 }
 
+// General Text
+body {
+	letter-spacing: 0.02em;
+	-webkit-font-smoothing: antialiased;
+}
+
 // Headings
 
 h1,
