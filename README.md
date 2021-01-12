@@ -139,3 +139,4 @@ We hope your submission is… to die for.
 - I don't think its necessary to use css in js because bootstrap components are already styled.
 - Using Redux + React Redux for complex states.
 - Using Axios for the api.
+- I did a custom hook to detect if the app is visualized on iOS or Android and do something.
